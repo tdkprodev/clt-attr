@@ -1,9 +1,8 @@
-##9/1/2018
-App Name: CLT-ATTR (Charlotte Attraction)
+## App Name: CLT-ATTR (Charlotte Attraction)
 Initialized development
 
-Build Stack:
-# TypeScript
-# React
-## MaterialUi
-# Node
+##Build Stack:
+TypeScript
+React
+MaterialUi
+Node

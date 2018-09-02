@@ -1,17 +1,15 @@
 # CLT-ATTR
 
 CLT-ATTR is a web app showcasing the attractions of Charlotte, North Carolina.
-  - Type some Markdown on the left
-  - See HTML in the right
-  - Magic
+  - Display/link the user to the common attractions of Charlotte.
+  - Amaze the user with visual spectacular.
+
 
 ## Features!
+  - <To be determined>
 
-  - Import a HTML file and watch it magically convert to Markdown
-  - Drag and drop images (requires your Dropbox account be linked
-  - 
+
 ### Build
-
 The build for clt-attr
 
 * [TypeScript] - extension of JavaScript to build robust applications.
@@ -20,6 +18,7 @@ The build for clt-attr
 * [Mobx] - State manager
 * [Node/Express] - back-end server
 * [Docker] - <Possible future integration>
+
 
 ### Installation
 Install the dependencies and devDependencies and start the server.
@@ -39,7 +38,6 @@ $ <To be determined>
 ```
 
 ### Development
-
 Want to contribute? Great!
 
 - Clone the repo

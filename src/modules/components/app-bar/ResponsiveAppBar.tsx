@@ -133,4 +133,4 @@ class ResponsiveDrawer extends React.Component<IProps, IState>{
   }
 }
 
-export default withStyles(styles, { withTheme: true })(ResponsiveDrawer);
+export const MyAppBar = withStyles(styles, { withTheme: true })(ResponsiveDrawer);

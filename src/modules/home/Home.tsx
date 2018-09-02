@@ -3,40 +3,38 @@ import * as React from 'react'
 import { observable } from 'mobx';
 import { observer } from 'mobx-react';
 
-import Hero from '../components/Hero';
-import ResponsiveAppBar from '../components/ResponsiveAppBar';
+import { MyAppBar } from '../components/app-bar';
+import { Welcome } from '../components/welcome';
 
 interface IProps {
   noProps?: boolean;
 }
 
 @observer
-class Home extends React.Component<IProps> {
+export class Home extends React.Component<IProps> {
   @observable public showApp: boolean = false;
 
   public renderHomePage = () => {
     this.showApp = true;
   }
-  
+
   public render() {
-    
+
     return (
       <section className="home" id="home">
         {this.showApp ? this.renderHomeBody() : this.renderHero()}
       </section>
     );
-  } 
+  }
 
   public renderHero = () => {
-    return <Hero renderHomePage={this.renderHomePage}/>
+    return <Welcome renderHomePage={this.renderHomePage} />
   }
 
   public renderHomeBody = () => {
-    
+
     return (
-      <ResponsiveAppBar />
+      <MyAppBar />
     );
   }
 }
- 
-export default Home;

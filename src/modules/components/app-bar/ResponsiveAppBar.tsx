@@ -1,14 +1,18 @@
 import * as React from 'react';
 
 import AppBar from '@material-ui/core/AppBar';
-import Divider from '@material-ui/core/Divider';
+// import Divider from '@material-ui/core/Divider';
 import Drawer from '@material-ui/core/Drawer';
 import Hidden from '@material-ui/core/Hidden';
 import IconButton from '@material-ui/core/IconButton';
 import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/List';
+import ListItemIcon from '@material-ui/core/ListItemIcon';
+import ListItemText from '@material-ui/core/ListItemText';
 import { withStyles } from '@material-ui/core/styles';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
+import DraftsIcon from '@material-ui/icons/Drafts';
 import MenuIcon from '@material-ui/icons/Menu';
 
 const drawerWidth = 240;
@@ -31,6 +35,11 @@ const styles: any = (theme: any) => ({
     [theme.breakpoints.up('md')]: {
       position: 'relative',
     },
+  },
+  list: {
+    backgroundColor: theme.palette.background.paper,
+    maxWidth: 360,
+    width: '100%',
   },
   navIconHide: {
     [theme.breakpoints.up('md')]: {
@@ -71,13 +80,20 @@ class ResponsiveDrawer extends React.Component<IProps, IState>{
     const { classes, theme } = this.props;
 
     const drawer = (
-      <div>
-        <div className={classes.toolbar} />
-        <Divider />
-        <List>{'mailFolderListItems'}</List>
-        <Divider />
-        <List>{'otherMailFolderListItems'}</List>
-      </div>
+      <List component="nav">
+        <ListItem>
+          <ListItemIcon>
+            <DraftsIcon />
+          </ListItemIcon>
+          <ListItemText primary="Bars" />
+        </ListItem>
+        <ListItem>
+          <ListItemIcon>
+            <DraftsIcon />
+          </ListItemIcon>
+          <ListItemText primary="Museum" />
+        </ListItem>
+      </List>
     );
 
     return (
@@ -93,7 +109,7 @@ class ResponsiveDrawer extends React.Component<IProps, IState>{
               <MenuIcon />
             </IconButton>
             <Typography variant="title" color="inherit" noWrap={true}>
-              Responsive drawer
+              Charlotte Attractions
             </Typography>
           </Toolbar>
         </AppBar>
@@ -126,11 +142,11 @@ class ResponsiveDrawer extends React.Component<IProps, IState>{
         </Hidden>
         <main className={classes.content}>
           <div className={classes.toolbar} />
-          <Typography noWrap={true}>{'You think water moves fast? You should see ice.'}</Typography>
+          {this.props.children}
         </main>
       </div>
     );
   }
 }
 
-export const MyAppBar = withStyles(styles, { withTheme: true })(ResponsiveDrawer);
+export const ResponsiveAppBar = withStyles(styles, { withTheme: true })(ResponsiveDrawer);

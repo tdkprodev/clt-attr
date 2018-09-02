@@ -7,17 +7,13 @@ import charSkyViewWebm from "@media/charlotteSkyView.webm";
 import { Button, Typography } from '@material-ui/core'
 
 interface IProps {
-  renderHomePage?: any;
+  nothing?: boolean
 }
 
 export class Welcome extends React.Component<IProps> {
   constructor(props: IProps) {
     super(props);
     this.state = {};
-  }
-
-  public handleOnClick = () => {
-    this.props.renderHomePage();
   }
 
   public render() {
@@ -47,7 +43,7 @@ export class Welcome extends React.Component<IProps> {
         variant="contained"
         color="primary"
         size="large"
-        onClick={this.handleOnClick}
+        href="/home"
       >
         Enter
         </Button>

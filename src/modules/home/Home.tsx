@@ -3,8 +3,9 @@ import * as React from 'react'
 import { observable } from 'mobx';
 import { observer } from 'mobx-react';
 
-import { MyAppBar } from '@components/app-bar';
-import { Welcome } from '@components/welcome';
+import { ResponsiveAppBar } from '@components/app-bar';
+
+// import { Typography } from '@material-ui/core';
 
 interface IProps {
   noProps?: boolean;
@@ -21,20 +22,11 @@ export class Home extends React.Component<IProps> {
   public render() {
 
     return (
-      <section className="home" id="home">
-        {this.showApp ? this.renderHomeBody() : this.renderHero()}
+      <section className="home">
+        <ResponsiveAppBar>
+          BODY CONTENT GOES HERE
+        </ResponsiveAppBar>
       </section>
-    );
-  }
-
-  public renderHero = () => {
-    return <Welcome renderHomePage={this.renderHomePage} />
-  }
-
-  public renderHomeBody = () => {
-
-    return (
-      <MyAppBar />
     );
   }
 }

@@ -3,8 +3,8 @@ import * as React from 'react'
 import { observable } from 'mobx';
 import { observer } from 'mobx-react';
 
-import { MyAppBar } from '../components/app-bar';
-import { Welcome } from '../components/welcome';
+import { MyAppBar } from '@components/app-bar';
+import { Welcome } from '@components/welcome';
 
 interface IProps {
   noProps?: boolean;

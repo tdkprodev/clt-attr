@@ -1,6 +1,11 @@
 {
   "compilerOptions": {
-    "baseUrl": ".",
+    "baseUrl": "./src",
+    "paths": {
+      "@media/*": ["media/*"],
+      "@modules/*": ["modules/*"],
+      "@components/*": ["modules/components/*"],
+    },
     "outDir": "build/dist",
     "module": "esnext",
     "target": "es5",

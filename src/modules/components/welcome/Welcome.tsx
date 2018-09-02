@@ -1,8 +1,8 @@
 import * as React from "react";
 
-import charSkyline from "../../../media/charlotteSkyline.jpg";
-import charSkyView from "../../../media/charlotteSkyView.mp4";
-import charSkyViewWebm from "../../../media/charlotteSkyView.webm";
+import charSkyline from "@media/charlotteSkyline.jpg";
+import charSkyView from "@media/charlotteSkyView.mp4";
+import charSkyViewWebm from "@media/charlotteSkyView.webm";
 
 import { Button, Typography } from '@material-ui/core'
 

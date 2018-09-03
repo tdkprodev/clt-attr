@@ -9,11 +9,11 @@ CLT-ATTR is a web app showcasing the attractions of Charlotte, North Carolina.
 The build for clt-attr
 
 * [TypeScript] - extension of JavaScript to build robust applications.
-* [React] - front-end framework 
+* [React] - front-end library for building composable UI.
 * [MaterialUi] - React components that implement Google's Material Design.
 * [Mobx] - State manager
 * [Node/Express] - back-end server
-* [Docker] - *Possible future integration*
+* [Docker] - *Not yet implemented -- Possible future integration*
 
 
 ### Installation

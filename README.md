@@ -11,9 +11,9 @@ The build for clt-attr
 * [TypeScript] - extension of JavaScript to build robust applications.
 * [React] - front-end library for building composable UI.
 * [MaterialUi] - React components that implement Google's Material Design.
-* [Mobx] - State manager
-* [Node/Express] - back-end server
-* [Docker] - *Not yet implemented -- Possible future integration*
+* [Mobx] - State manager.
+* [Node/Express] - back-end server.
+* [Sass] - CSS pre-processor for a more productive development.
 
 
 ### Installation

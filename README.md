@@ -39,7 +39,7 @@ Want to contribute? Great!
 - Clone the repo
 - Install the dependencies
 - Make/add changes
-- submit a pull request
+- submit a pull request to pre-development
 
 ### Contributors
 -   [tdkprodev](https://github.com/tdkprodev)

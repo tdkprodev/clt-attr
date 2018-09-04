@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { withRouter } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 
 import classNames from 'classnames';
 import { compose } from 'recompose'
@@ -126,6 +126,7 @@ class MiniDrawer extends React.Component<IProps, IState> {
 
   render() {
     const { classes, theme } = this.props;
+    // const LinkHome = <Link to="/" />;
 
     return (
       <div className={classes.root}>
@@ -161,41 +162,51 @@ class MiniDrawer extends React.Component<IProps, IState> {
           </div>
           <Divider />
           <List>
-            <ListItem button={true} onClick={this.handleMenuClick('Home')}>
-              <ListItemIcon>
-                 <Home /> 
-              </ListItemIcon>
+            <ListItem button={true}>
+              <Link to="/">
+                <ListItemIcon>
+                  <Home />
+                </ListItemIcon>
+              </Link>
               <ListItemText primary="Home" />
             </ListItem>
-            <ListItem button={true} onClick={this.handleMenuClick('Places')}>
-              <ListItemIcon>
-                 <Place /> 
-              </ListItemIcon>
+            <ListItem button={true}>
+              <Link to="/place">
+                <ListItemIcon>
+                  <Place />
+                </ListItemIcon>
+              </Link>
               <ListItemText primary="Places" />
             </ListItem>
-            <ListItem button={true} onClick={this.handleMenuClick('Restaurants')}>
-              <ListItemIcon>
-                 <Restaurant /> 
-              </ListItemIcon>
+            <ListItem button={true}>
+              <Link to="/restaurant">
+                <ListItemIcon>
+                  <Restaurant />
+                </ListItemIcon>
+              </Link>
               <ListItemText primary="Restaurants" />
             </ListItem>
-            <ListItem button={true} onClick={this.handleMenuClick('Local Bars')}>
-              <ListItemIcon>
-                 <LocalBar /> 
-              </ListItemIcon>
+            <ListItem button={true}>
+              <Link to="/localbar">
+                <ListItemIcon>
+                  <LocalBar />
+                </ListItemIcon>
+              </Link>
               <ListItemText primary="Local Bars" />
             </ListItem>
-            <ListItem button={true} onClick={this.handleMenuClick('Info')}>
-              <ListItemIcon>
-                 <Info /> 
-              </ListItemIcon>
+            <ListItem button={true}>
+              <Link to="/info">
+                <ListItemIcon>
+                  <Info />
+                </ListItemIcon>
+              </Link>
               <ListItemText primary="Info" />
             </ListItem>
           </List>
         </Drawer>
         <main className={classes.content}>
           <div className={classes.toolbar} />
-            {this.renderBody()}
+          {this.renderBody()}
         </main>
       </div>
     );

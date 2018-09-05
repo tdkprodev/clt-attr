@@ -103,31 +103,20 @@ interface IProps {
 
 }
 
-interface IState {
-  open: boolean;
-}
+interface IState {}
 
 @observer
 class MiniDrawer extends React.Component<IProps, IState> {
   @observable selectedMenu: string = 'info';
-
-  state = {
-    open: false,
-  };
+  @observable drawerOpen: boolean = false;
 
   handleDrawerOpen = () => {
-    this.setState({ open: true });
+    this.drawerOpen = true;
   };
 
   handleDrawerClose = () => {
-    this.setState({ open: false });
+    this.drawerOpen = false;
   };
-
-  handleMenuClick = (path: string) => () => {
-    alert(`${path} clicked`);
-    // @ts-ignore
-    this.props.history.push(`/${path.toLowerCase()}`);
-  }
 
   handleListItemClick = (event: React.MouseEvent, value: string) => {
     this.selectedMenu = value;
@@ -140,14 +129,14 @@ class MiniDrawer extends React.Component<IProps, IState> {
       <div className={classes.root}>
         <AppBar
           position="absolute"
-          className={classNames(classes.appBar, this.state.open && classes.appBarShift)}
+          className={classNames(classes.appBar, this.drawerOpen && classes.appBarShift)}
         >
-          <Toolbar disableGutters={!this.state.open}>
+          <Toolbar disableGutters={!this.drawerOpen}>
             <IconButton
               color="inherit"
               aria-label="Open drawer"
               onClick={this.handleDrawerOpen}
-              className={classNames(classes.menuButton, this.state.open && classes.hide)}
+              className={classNames(classes.menuButton, this.drawerOpen && classes.hide)}
             >
               <MenuIcon />
             </IconButton>
@@ -161,9 +150,9 @@ class MiniDrawer extends React.Component<IProps, IState> {
         <Drawer
           variant="permanent"
           classes={{
-            paper: classNames(classes.drawerPaper, !this.state.open && classes.drawerPaperClose),
+            paper: classNames(classes.drawerPaper, !this.drawerOpen && classes.drawerPaperClose),
           }}
-          open={this.state.open}
+          open={this.drawerOpen}
         >
           <div className={classes.toolbar}>
             <IconButton onClick={this.handleDrawerClose}>

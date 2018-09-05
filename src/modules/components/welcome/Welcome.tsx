@@ -11,6 +11,9 @@ interface IProps {
   nothing?: boolean
 }
 
+/**
+ * Render the landing page and provide a button to navigate to the app.
+ */
 export class Welcome extends React.Component<IProps> {
   constructor(props: IProps) {
     super(props);

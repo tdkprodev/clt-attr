@@ -102,9 +102,13 @@ interface IProps {
   theme: any;
 
 }
-
 interface IState {}
 
+/**
+ * Renders the title bar, sidebar, and main content.
+ * 
+ * The main content rendered depends on the children passed in which depends on the path of the url.
+ */
 @observer
 class MiniDrawer extends React.Component<IProps, IState> {
   @observable selectedMenu: string = 'favorite';

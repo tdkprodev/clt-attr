@@ -12,9 +12,15 @@ import { Favorite } from '@components/favorite';
 import { App } from '@modules/app';
 import { NotFoundPage } from '@modules/not-found-page';
 
+/**
+ * Render the welcome/landing page initially.
+ * 
+ * The welcome/landing page provides a link to enter the app. The app's title and side bar 
+ * are static while the main content is rendered based on the url path governed by react-router-dom.
+ */
 const AppRouter = () => (
   <BrowserRouter>
-    <div>
+    <React.Fragment>
       <Route exact={true} path="/" component={Welcome} />
       <App>
         <Switch>
@@ -27,7 +33,7 @@ const AppRouter = () => (
           <Route component={NotFoundPage} />
         </Switch>
       </App>
-    </div>
+    </React.Fragment>
   </BrowserRouter>
 );
 

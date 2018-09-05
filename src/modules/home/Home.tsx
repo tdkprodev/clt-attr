@@ -24,7 +24,7 @@ export class Home extends React.Component<IProps> {
     return (
       <section className="home">
         <ResponsiveAppBar>
-          BODY CONTENT GOES HERE
+          {this.props.children}
         </ResponsiveAppBar>
       </section>
     );

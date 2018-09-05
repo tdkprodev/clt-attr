@@ -126,8 +126,7 @@ class MiniDrawer extends React.Component<IProps, IState> {
 
   render() {
     const { classes, theme } = this.props;
-    // const LinkHome = <Link to="/" />;
-
+    
     return (
       <div className={classes.root}>
         <AppBar
@@ -163,7 +162,7 @@ class MiniDrawer extends React.Component<IProps, IState> {
           <Divider />
           <List>
             <ListItem button={true}>
-              <Link to="/">
+              <Link to="/home">
                 <ListItemIcon>
                   <Home />
                 </ListItemIcon>
@@ -206,23 +205,10 @@ class MiniDrawer extends React.Component<IProps, IState> {
         </Drawer>
         <main className={classes.content}>
           <div className={classes.toolbar} />
-          {this.renderBody()}
+          {this.props.children}
         </main>
       </div>
     );
-  }
-
-  renderBody = () => {
-    console.log(window.location.pathname);
-    const path = window.location.pathname.split('/').pop();
-
-    switch (path) {
-      case ('home'):
-        return <div>WELCOME HOME</div>;
-      default:
-        return <div>NOWHERE</div>;
-    }
-
   }
 }
 

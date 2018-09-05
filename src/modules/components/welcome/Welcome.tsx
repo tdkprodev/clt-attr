@@ -1,4 +1,5 @@
 import * as React from "react";
+import { Link } from 'react-router-dom';
 
 import charSkyline from "@media/charlotteSkyline.jpg";
 import charSkyView from "@media/charlotteSkyView.mp4";
@@ -38,15 +39,16 @@ export class Welcome extends React.Component<IProps> {
     <section className="welcome">
       <Typography variant="display4" align="center">Welcome to Charlotte</Typography>
       <div className="welcome__button-container">
-      <Button
-        className="hero-enter-btn"
-        variant="contained"
-        color="primary"
-        size="large"
-        href="/home"
-      >
-        Enter
+        <Link to="/favorite">
+          <Button
+            className="hero-enter-btn"
+            variant="contained"
+            color="primary"
+            size="large"
+          >
+            Enter
         </Button>
+        </Link>
       </div>
     </section>
   )

@@ -107,7 +107,7 @@ interface IState {}
 
 @observer
 class MiniDrawer extends React.Component<IProps, IState> {
-  @observable selectedMenu: string = 'info';
+  @observable selectedMenu: string = 'favorite';
   @observable drawerOpen: boolean = false;
 
   handleDrawerOpen = () => {

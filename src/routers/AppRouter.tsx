@@ -1,15 +1,15 @@
+import { observer } from 'mobx-react';
 import * as React from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
-import { observer } from 'mobx-react';
 // import { observable } from 'mobx';
 
-import { Welcome } from '@components/welcome';
 import { About } from '@components/about';
-import { Restaurant } from '@components/restaurant';
-import { Place } from '@components/place';
+import { Favorite } from '@components/favorite';
 import { Info } from '@components/info';
 import { LocalBar } from '@components/local-bar';
-import { Favorite } from '@components/favorite';
+import { Place } from '@components/place';
+import { Restaurant } from '@components/restaurant';
+import { Welcome } from '@components/welcome';
 
 import { App } from '@modules/app';
 import { NotFoundPage } from '@modules/not-found-page';
@@ -22,12 +22,12 @@ import { NotFoundPage } from '@modules/not-found-page';
  */
 @observer
 class AppRouter extends React.Component<{}, {}> {
-  render() {
+  public render() {
     return (
       <BrowserRouter>
         <div>
           <Switch>
-            <Route exact path="/" component={Welcome} />
+            <Route exact={true} path="/" component={Welcome} />
             <App>
               <Switch>
                 <Route path="/favorite" component={Favorite} />

@@ -31,35 +31,25 @@ import Restaurant from '@material-ui/icons/Restaurant';
 const drawerWidth = 240;
 
 const styles: any = (theme: Theme) => ({
-  root: {
-    flexGrow: 1,
-    height: "100vh",
-    zIndex: 1,
-    overflow: 'hidden',
-    position: 'relative',
-    display: 'flex',
-  },
   appBar: {
-    zIndex: theme.zIndex.drawer + 1,
     transition: theme.transitions.create(['width', 'margin'], {
-      easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.leavingScreen,
+      easing: theme.transitions.easing.sharp,
     }),
+    zIndex: theme.zIndex.drawer + 1,
   },
   appBarShift: {
     marginLeft: drawerWidth,
-    width: `calc(100% - ${drawerWidth}px)`,
     transition: theme.transitions.create(['width', 'margin'], {
-      easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.enteringScreen,
+      easing: theme.transitions.easing.sharp,
     }),
+    width: `calc(100% - ${drawerWidth}px)`,
   },
-  menuButton: {
-    marginLeft: 12,
-    marginRight: 36,
-  },
-  hide: {
-    display: 'none',
+  content: {
+    backgroundColor: theme.palette.background.default,
+    flexGrow: 1,
+    padding: theme.spacing.unit * 3,
   },
   drawerPaper: {
     position: 'relative',
@@ -81,17 +71,27 @@ const styles: any = (theme: Theme) => ({
       width: theme.spacing.unit * 9,
     },
   },
+  hide: {
+    display: 'none',
+  },
+  menuButton: {
+    marginLeft: 12,
+    marginRight: 36,
+  },
+  root: {
+    display: 'flex',
+    flexGrow: 1,
+    height: "100vh",
+    overflow: 'hidden',
+    position: 'relative',
+    zIndex: 1,
+  },
   toolbar: {
     alignItems: 'center',
     display: 'flex',
     justifyContent: 'flex-end',
     padding: '0 8px',
     ...theme.mixins.toolbar,
-  },
-  content: {
-    backgroundColor: theme.palette.background.default,
-    flexGrow: 1,
-    padding: theme.spacing.unit * 3,
   },
 });
 
@@ -102,7 +102,6 @@ interface IProps {
 
 /**
  * Renders the title bar, sidebar, and main content.
- * 
  * The main content rendered depends on the children passed in which depends on the path of the url.
  */
 @observer
@@ -117,10 +116,6 @@ class MiniDrawer extends React.Component<IProps, {}> {
   public handleDrawerClose = () => {
     this.drawerOpen = false;
   };
-
-  // public handleListItemClick = (event: React.MouseEvent, value: string) => {
-  //   this.selectedMenu = value;
-  // };
 
   public handleListItemClick = (event: React.MouseEvent<HTMLElement>) => {
     this.selectedMenu = event.currentTarget.dataset.menu;
@@ -144,7 +139,7 @@ class MiniDrawer extends React.Component<IProps, {}> {
             >
               <MenuIcon />
             </IconButton>
-            <Typography variant="title" noWrap>
+            <Typography variant="title" noWrap={true}>
               <Link to="/" className="app-title">
                 CLT ATTR
               </Link>

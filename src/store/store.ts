@@ -1,7 +1,7 @@
 import { observable } from 'mobx';
 
 class SuperStore {
-  @observable appEntered: boolean = false;
+  @observable public appEntered: boolean = false;
 }
 
 export const superStore = new SuperStore();

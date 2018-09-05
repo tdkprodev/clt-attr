@@ -8,5 +8,8 @@
       "node_modules/**/*.ts",
       "coverage/lcov-report/*.js"
     ]
+  },
+  "rules": {
+    "jsx-boolean-value": false // THIS RULE ROCKS
   }
 }

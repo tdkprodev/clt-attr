@@ -1,6 +1,6 @@
 import * as React from 'react'
 
-import { ResponsiveAppBar } from '@components/app-bar';
+import { ResponsiveAppBar } from '@modules/app-bar';
 
 interface IProps {
   children?: any;
@@ -12,4 +12,4 @@ export const App = (props: IProps) => (
       {props.children}
     </ResponsiveAppBar>
   </section>
-);
+);  

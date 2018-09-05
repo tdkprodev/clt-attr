@@ -7,13 +7,10 @@ import { Restaurant } from '@components/restaurant';
 import { Place } from '@components/place';
 import { Info } from '@components/info';
 import { LocalBar } from '@components/local-bar';
+import { Favorite } from '@components/favorite';
 
 import { Home } from '@modules/home';
 import { NotFoundPage } from '@modules/not-found-page';
-
-const MyHome = () => (
-  <div>MYHOME</div>
-);
 
 const AppRouter = () => (
   <BrowserRouter>
@@ -21,7 +18,7 @@ const AppRouter = () => (
       <Route exact={true} path="/" component={Welcome} />
       <Home>
         <Switch>
-          <Route exact path="/home" component={MyHome} />
+          <Route exact path="/favorite" component={Favorite} />
           <Route exact path="/place" component={Place} />
           <Route exact path="/restaurant" component={Restaurant} />
           <Route exact path="/about" component={About} />

@@ -22,11 +22,11 @@ import { Theme } from '@material-ui/core/styles/createMuiTheme';
 import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
-import Home from '@material-ui/icons/Home';
 import LocalBar from '@material-ui/icons/LocalBar';
 import Info from '@material-ui/icons/Info';
 import Restaurant from '@material-ui/icons/Restaurant';
 import Place from '@material-ui/icons/Place';
+import Favorite from '@material-ui/icons/Favorite';
 
 // import {About} from '@components/about';
 
@@ -172,10 +172,10 @@ class MiniDrawer extends React.Component<IProps, IState> {
           </div>
           <Divider />
           <List>
-            <Link to="/home" className="menu">
-              <ListItem button={true} selected={this.selectedMenu === 'home'} onClick={event => this.handleListItemClick(event, 'home')}>
+            <Link to="/favorite" className="menu">
+              <ListItem button={true} selected={this.selectedMenu === 'favorite'} onClick={event => this.handleListItemClick(event, 'favorite')}>
                 <ListItemIcon>
-                  <Home />
+                  <Favorite />
                 </ListItemIcon>
                 <ListItemText primary="Home" />
               </ListItem>

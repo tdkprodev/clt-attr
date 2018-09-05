@@ -1,4 +1,5 @@
 import * as React from "react";
+import { Link } from 'react-router-dom';
 
 import charSkyline from "@media/charlotteSkyline.jpg";
 import charSkyView from "@media/charlotteSkyView.mp4";
@@ -7,17 +8,16 @@ import charSkyViewWebm from "@media/charlotteSkyView.webm";
 import { Button, Typography } from '@material-ui/core'
 
 interface IProps {
-  renderHomePage?: any;
+  nothing?: boolean
 }
 
+/**
+ * Render the landing page and provide a button to navigate to the app.
+ */
 export class Welcome extends React.Component<IProps> {
   constructor(props: IProps) {
     super(props);
     this.state = {};
-  }
-
-  public handleOnClick = () => {
-    this.props.renderHomePage();
   }
 
   public render() {
@@ -42,15 +42,16 @@ export class Welcome extends React.Component<IProps> {
     <section className="welcome">
       <Typography variant="display4" align="center">Welcome to Charlotte</Typography>
       <div className="welcome__button-container">
-      <Button
-        className="hero-enter-btn"
-        variant="contained"
-        color="primary"
-        size="large"
-        onClick={this.handleOnClick}
-      >
-        Enter
+        <Link to="/favorite">
+          <Button
+            className="hero-enter-btn"
+            variant="contained"
+            color="primary"
+            size="large"
+          >
+            Enter
         </Button>
+        </Link>
       </div>
     </section>
   )

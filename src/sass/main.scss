@@ -8,8 +8,14 @@
 @import './base/typography';
 
 @import './components/bg-video';
+@import './components/app-bar';
 
 @import './layout/container';
 @import './layout/hero';
 @import './layout/footer';
 
+.app-title {
+  color: white;
+  text-decoration: none;
+
+}

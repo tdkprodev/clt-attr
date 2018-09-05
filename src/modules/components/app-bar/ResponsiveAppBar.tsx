@@ -3,6 +3,8 @@ import { Link, withRouter } from 'react-router-dom';
 
 import classNames from 'classnames';
 import { compose } from 'recompose'
+import { observer } from 'mobx-react';
+import { observable } from 'mobx';
 
 import { withStyles } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
@@ -105,7 +107,10 @@ interface IState {
   open: boolean;
 }
 
+@observer
 class MiniDrawer extends React.Component<IProps, IState> {
+  @observable selectedMenu: string = 'info';
+
   state = {
     open: false,
   };
@@ -124,9 +129,13 @@ class MiniDrawer extends React.Component<IProps, IState> {
     this.props.history.push(`/${path.toLowerCase()}`);
   }
 
+  handleListItemClick = (event: React.MouseEvent, value: string) => {
+    this.selectedMenu = value;
+  };
+
   render() {
     const { classes, theme } = this.props;
-    
+
     return (
       <div className={classes.root}>
         <AppBar
@@ -142,8 +151,10 @@ class MiniDrawer extends React.Component<IProps, IState> {
             >
               <MenuIcon />
             </IconButton>
-            <Typography variant="title" color="inherit" noWrap>
-              Mini variant drawer
+            <Typography variant="title" noWrap>
+              <Link to="/" className="app-title">
+                CLT ATTR
+              </Link>
             </Typography>
           </Toolbar>
         </AppBar>
@@ -161,46 +172,46 @@ class MiniDrawer extends React.Component<IProps, IState> {
           </div>
           <Divider />
           <List>
-            <ListItem button={true}>
-              <Link to="/home">
+            <Link to="/home" className="menu">
+              <ListItem button={true} selected={this.selectedMenu === 'home'} onClick={event => this.handleListItemClick(event, 'home')}>
                 <ListItemIcon>
                   <Home />
                 </ListItemIcon>
-              </Link>
-              <ListItemText primary="Home" />
-            </ListItem>
-            <ListItem button={true}>
-              <Link to="/place">
+                <ListItemText primary="Home" />
+              </ListItem>
+            </Link>
+            <Link to="/place" className="menu">
+              <ListItem button={true} selected={this.selectedMenu === 'place'} onClick={event => this.handleListItemClick(event, 'place')}>
                 <ListItemIcon>
                   <Place />
                 </ListItemIcon>
-              </Link>
-              <ListItemText primary="Places" />
-            </ListItem>
-            <ListItem button={true}>
-              <Link to="/restaurant">
+                <ListItemText primary="Places" />
+              </ListItem>
+            </Link>
+            <Link to="/restaurant" className="menu">
+              <ListItem button={true} selected={this.selectedMenu === 'restaurant'} onClick={event => this.handleListItemClick(event, 'restaruant')}>
                 <ListItemIcon>
                   <Restaurant />
                 </ListItemIcon>
-              </Link>
-              <ListItemText primary="Restaurants" />
-            </ListItem>
-            <ListItem button={true}>
-              <Link to="/localbar">
+                <ListItemText primary="Restaurants" />
+              </ListItem>
+            </Link>
+            <Link to="/localbar" className="menu">
+              <ListItem button={true} selected={this.selectedMenu === 'localbar'} onClick={event => this.handleListItemClick(event, 'localbar')}>
                 <ListItemIcon>
                   <LocalBar />
                 </ListItemIcon>
-              </Link>
-              <ListItemText primary="Local Bars" />
-            </ListItem>
-            <ListItem button={true}>
-              <Link to="/info">
+                <ListItemText primary="Local Bars" />
+              </ListItem>
+            </Link>
+            <Link to="/info" className="menu">
+              <ListItem button={true} selected={this.selectedMenu === 'info'} onClick={event => this.handleListItemClick(event, 'info')}>
                 <ListItemIcon>
                   <Info />
                 </ListItemIcon>
-              </Link>
-              <ListItemText primary="Info" />
-            </ListItem>
+                <ListItemText primary="Info" />
+              </ListItem>
+            </Link>
           </List>
         </Drawer>
         <main className={classes.content}>

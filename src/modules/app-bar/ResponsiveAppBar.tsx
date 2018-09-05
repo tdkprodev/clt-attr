@@ -28,8 +28,6 @@ import Restaurant from '@material-ui/icons/Restaurant';
 import Place from '@material-ui/icons/Place';
 import Favorite from '@material-ui/icons/Favorite';
 
-// import {About} from '@components/about';
-
 const drawerWidth = 240;
 
 const styles: any = (theme: Theme) => ({

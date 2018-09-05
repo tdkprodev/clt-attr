@@ -3,6 +3,7 @@
     "baseUrl": "./src",
     "paths": {
       "@media/*": ["media/*"],
+      "@store/*": ["store/*"],
       "@modules/*": ["modules/*"],
       "@components/*": ["modules/components/*"],
     },

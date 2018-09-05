@@ -1,5 +1,7 @@
 import * as React from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import { observer } from 'mobx-react';
+// import { observable } from 'mobx';
 
 import { Welcome } from '@components/welcome';
 import { About } from '@components/about';
@@ -18,23 +20,30 @@ import { NotFoundPage } from '@modules/not-found-page';
  * The welcome/landing page provides a link to enter the app. The app's title and side bar 
  * are static while the main content is rendered based on the url path governed by react-router-dom.
  */
-const AppRouter = () => (
-  <BrowserRouter>
-    <React.Fragment>
-      <Route exact={true} path="/" component={Welcome} />
-      <App>
-        <Switch>
-          <Route exact path="/favorite" component={Favorite} />
-          <Route exact path="/place" component={Place} />
-          <Route exact path="/restaurant" component={Restaurant} />
-          <Route exact path="/localbar" component={LocalBar} />
-          <Route exact path="/about" component={About} />
-          <Route exact path="/info" component={Info} />
-          <Route component={NotFoundPage} />
-        </Switch>
-      </App>
-    </React.Fragment>
-  </BrowserRouter>
-);
+@observer
+class AppRouter extends React.Component<{}, {}> {
+  render() {
+    return (
+      <BrowserRouter>
+        <div>
+          <Switch>
+            <Route exact path="/" component={Welcome} />
+            <App>
+              <Switch>
+                <Route path="/favorite" component={Favorite} />
+                <Route path="/place" component={Place} />
+                <Route path="/restaurant" component={Restaurant} />
+                <Route path="/localbar" component={LocalBar} />
+                <Route path="/about" component={About} />
+                <Route path="/info" component={Info} />
+                <Route component={NotFoundPage} />
+              </Switch>
+            </App>
+          </Switch>
+        </div>
+      </BrowserRouter>
+    );
+  }
+}
 
 export default AppRouter;

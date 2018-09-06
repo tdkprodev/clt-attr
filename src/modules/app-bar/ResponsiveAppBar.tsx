@@ -81,7 +81,7 @@ const styles: any = (theme: Theme) => ({
   root: {
     display: 'flex',
     flexGrow: 1,
-    height: "100vh",
+    minHeight: "100vh", // #TK for scrollabilty
     overflow: 'hidden',
     position: 'relative',
     zIndex: 1,
@@ -161,7 +161,12 @@ class MiniDrawer extends React.Component<IProps, {}> {
           <Divider />
           <List>
             <Link to="/favorite" className="menu">
-              <ListItem button selected={this.selectedMenu === 'favorite'} data-menu="favorite" onClick={this.handleListItemClick}>
+              <ListItem
+                button
+                selected={this.selectedMenu === 'favorite'}
+                data-menu="favorite"
+                onClick={this.handleListItemClick}
+              >
                 <ListItemIcon>
                   <Favorite />
                 </ListItemIcon>
@@ -169,7 +174,12 @@ class MiniDrawer extends React.Component<IProps, {}> {
               </ListItem>
             </Link>
             <Link to="/place" className="menu">
-              <ListItem button selected={this.selectedMenu === 'place'} data-menu="place" onClick={this.handleListItemClick}>
+              <ListItem
+                button
+                selected={this.selectedMenu === 'place'}
+                data-menu="place"
+                onClick={this.handleListItemClick}
+              >
                 <ListItemIcon>
                   <Place />
                 </ListItemIcon>
@@ -177,7 +187,12 @@ class MiniDrawer extends React.Component<IProps, {}> {
               </ListItem>
             </Link>
             <Link to="/restaurant" className="menu">
-              <ListItem button selected={this.selectedMenu === 'restaurant'} data-menu="restaurant" onClick={this.handleListItemClick}>
+              <ListItem
+                button
+                selected={this.selectedMenu === 'restaurant'}
+                data-menu="restaurant"
+                onClick={this.handleListItemClick}
+              >
                 <ListItemIcon>
                   <Restaurant />
                 </ListItemIcon>
@@ -185,7 +200,12 @@ class MiniDrawer extends React.Component<IProps, {}> {
               </ListItem>
             </Link>
             <Link to="/localbar" className="menu">
-              <ListItem button selected={this.selectedMenu === 'localbar'} data-menu="localbar" onClick={this.handleListItemClick}>
+              <ListItem
+                button
+                selected={this.selectedMenu === 'localbar'}
+                data-menu="localbar"
+                onClick={this.handleListItemClick}
+              >
                 <ListItemIcon>
                   <LocalBar />
                 </ListItemIcon>
@@ -193,7 +213,12 @@ class MiniDrawer extends React.Component<IProps, {}> {
               </ListItem>
             </Link>
             <Link to="/info" className="menu">
-              <ListItem button selected={this.selectedMenu === 'info'} data-menu="info" onClick={this.handleListItemClick}>
+              <ListItem
+                button
+                selected={this.selectedMenu === 'info'}
+                data-menu="info"
+                onClick={this.handleListItemClick}
+              >
                 <ListItemIcon>
                   <Info />
                 </ListItemIcon>
@@ -210,6 +235,5 @@ class MiniDrawer extends React.Component<IProps, {}> {
     );
   }
 }
-
 
 export const ResponsiveAppBar = compose(withRouter, withStyles(styles, { withTheme: true }))(MiniDrawer);

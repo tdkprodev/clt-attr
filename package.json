@@ -22,6 +22,8 @@
     "watch-css": "npm run build-css && node-sass-chokidar --include-path ./src --include-path ./node_modules src/ -o src/ --watch --recursive",
     "start-js": "react-scripts-ts start",
     "start": "npm-run-all -p watch-css start-js",
+    "start-dev": "nodemon --watch src/**/*.ts --exec yarn start-server",
+    "start-server": "ts-node --inspect=5858 src/server.ts",
     "build-js": "react-scripts-ts build",
     "build": "npm-run-all build-css build-js",
     "test": "react-scripts-ts test --env=jsdom",

@@ -33,9 +33,10 @@
     "noImplicitAny": true,
     "strictNullChecks": true,
     "suppressImplicitAnyIndexErrors": true,
-    "noUnusedLocals": true,
+    "noUnusedLocals": false, // from true
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
+    "noEmitOnError": false,
   },
   "exclude": [
     "node_modules",
@@ -44,6 +45,7 @@
     "acceptance-tests",
     "webpack",
     "jest",
-    "src/setupTests.ts"
+    "src/setupTests.ts",
+    "src/server.ts"
   ]
 }

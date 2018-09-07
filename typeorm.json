@@ -4,5 +4,9 @@
   "port": 3306,
   "username": "root",
   "password": "root",
-  "database": "clt-attr"
+  "database": "clt-attr",
+  "entities": [
+    "src/entity/*.ts"
+  ],
+  "synchronize": true
 }

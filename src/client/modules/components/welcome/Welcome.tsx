@@ -5,17 +5,13 @@ import charSkyline from "@media/charlotteSkyline.jpg";
 import charSkyView from "@media/charlotteSkyView.mp4";
 import charSkyViewWebm from "@media/charlotteSkyView.webm";
 
-import { Button, Typography } from '@material-ui/core'
-
-interface IProps {
-  nothing?: boolean
-}
+import { Button, Typography } from '@material-ui/core';
 
 /**
  * Render the landing page and provide a button to navigate to the app.
  */
-export class Welcome extends React.Component<IProps> {
-  constructor(props: IProps) {
+export class Welcome extends React.Component<any, any> {
+  constructor(props: any) {
     super(props);
     this.state = {};
   }

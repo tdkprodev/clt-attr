@@ -2,131 +2,126 @@ import * as React from 'react';
 import { Link, withRouter } from 'react-router-dom';
 
 import classNames from 'classnames';
-import { compose } from 'recompose'
-import { observer } from 'mobx-react';
 import { observable } from 'mobx';
+import { observer } from 'mobx-react';
+import { compose } from 'recompose'
 
-import { withStyles } from '@material-ui/core/styles';
-import Drawer from '@material-ui/core/Drawer';
 import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
+import Divider from '@material-ui/core/Divider';
+import Drawer from '@material-ui/core/Drawer';
+import IconButton from '@material-ui/core/IconButton';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-import Typography from '@material-ui/core/Typography';
-import Divider from '@material-ui/core/Divider';
-import IconButton from '@material-ui/core/IconButton';
+import { withStyles } from '@material-ui/core/styles';
 import { Theme } from '@material-ui/core/styles/createMuiTheme';
+import Toolbar from '@material-ui/core/Toolbar';
+import Typography from '@material-ui/core/Typography';
 
-import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
-import LocalBar from '@material-ui/icons/LocalBar';
-import Info from '@material-ui/icons/Info';
-import Restaurant from '@material-ui/icons/Restaurant';
-import Place from '@material-ui/icons/Place';
 import Favorite from '@material-ui/icons/Favorite';
-
-// import {About} from '@components/about';
+import Info from '@material-ui/icons/Info';
+import LocalBar from '@material-ui/icons/LocalBar';
+import MenuIcon from '@material-ui/icons/Menu';
+import Place from '@material-ui/icons/Place';
+import Restaurant from '@material-ui/icons/Restaurant';
 
 const drawerWidth = 240;
 
 const styles: any = (theme: Theme) => ({
-  root: {
-    flexGrow: 1,
-    height: 440,
-    zIndex: 1,
-    overflow: 'hidden',
-    position: 'relative',
-    display: 'flex',
-  },
   appBar: {
-    zIndex: theme.zIndex.drawer + 1,
     transition: theme.transitions.create(['width', 'margin'], {
-      easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.leavingScreen,
+      easing: theme.transitions.easing.sharp,
     }),
+    zIndex: theme.zIndex.drawer + 1,
   },
   appBarShift: {
     marginLeft: drawerWidth,
-    width: `calc(100% - ${drawerWidth}px)`,
     transition: theme.transitions.create(['width', 'margin'], {
-      easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.enteringScreen,
+      easing: theme.transitions.easing.sharp,
     }),
+    width: `calc(100% - ${drawerWidth}px)`,
   },
-  menuButton: {
-    marginLeft: 12,
-    marginRight: 36,
-  },
-  hide: {
-    display: 'none',
+  content: {
+    backgroundColor: theme.palette.background.default,
+    flexGrow: 1,
+    padding: theme.spacing.unit * 3,
   },
   drawerPaper: {
     position: 'relative',
+    transition: theme.transitions.create('width', {
+      duration: theme.transitions.duration.enteringScreen,
+      easing: theme.transitions.easing.sharp,
+    }),
     whiteSpace: 'nowrap',
     width: drawerWidth,
-    transition: theme.transitions.create('width', {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.enteringScreen,
-    }),
   },
   drawerPaperClose: {
     overflowX: 'hidden',
     transition: theme.transitions.create('width', {
-      easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.leavingScreen,
+      easing: theme.transitions.easing.sharp,
     }),
     width: theme.spacing.unit * 7,
     [theme.breakpoints.up('sm')]: {
       width: theme.spacing.unit * 9,
     },
   },
-  toolbar: {
+  hide: {
+    display: 'none',
+  },
+  menuButton: {
+    marginLeft: 12,
+    marginRight: 36,
+  },
+  root: {
     display: 'flex',
+    flexGrow: 1,
+    minHeight: "100vh", // #TK for scrollabilty
+    overflow: 'hidden',
+    position: 'relative',
+    zIndex: 1,
+  },
+  toolbar: {
     alignItems: 'center',
+    display: 'flex',
     justifyContent: 'flex-end',
     padding: '0 8px',
     ...theme.mixins.toolbar,
-  },
-  content: {
-    flexGrow: 1,
-    backgroundColor: theme.palette.background.default,
-    padding: theme.spacing.unit * 3,
   },
 });
 
 interface IProps {
   classes: any;
   theme: any;
-
 }
-interface IState {}
 
 /**
  * Renders the title bar, sidebar, and main content.
- * 
  * The main content rendered depends on the children passed in which depends on the path of the url.
  */
 @observer
-class MiniDrawer extends React.Component<IProps, IState> {
-  @observable selectedMenu: string = 'favorite';
-  @observable drawerOpen: boolean = false;
+class MiniDrawer extends React.Component<IProps, {}> {
+  @observable private selectedMenu: string | undefined = 'favorite';
+  @observable private drawerOpen: boolean = false;
 
-  handleDrawerOpen = () => {
+  public handleDrawerOpen = () => {
     this.drawerOpen = true;
   };
 
-  handleDrawerClose = () => {
+  public handleDrawerClose = () => {
     this.drawerOpen = false;
   };
 
-  handleListItemClick = (event: React.MouseEvent, value: string) => {
-    this.selectedMenu = value;
+  public handleListItemClick = (event: React.MouseEvent<HTMLElement>) => {
+    this.selectedMenu = event.currentTarget.dataset.menu;
   };
 
-  render() {
+  public render() {
     const { classes, theme } = this.props;
 
     return (
@@ -166,7 +161,12 @@ class MiniDrawer extends React.Component<IProps, IState> {
           <Divider />
           <List>
             <Link to="/favorite" className="menu">
-              <ListItem button={true} selected={this.selectedMenu === 'favorite'} onClick={event => this.handleListItemClick(event, 'favorite')}>
+              <ListItem
+                button
+                selected={this.selectedMenu === 'favorite'}
+                data-menu="favorite"
+                onClick={this.handleListItemClick}
+              >
                 <ListItemIcon>
                   <Favorite />
                 </ListItemIcon>
@@ -174,7 +174,12 @@ class MiniDrawer extends React.Component<IProps, IState> {
               </ListItem>
             </Link>
             <Link to="/place" className="menu">
-              <ListItem button={true} selected={this.selectedMenu === 'place'} onClick={event => this.handleListItemClick(event, 'place')}>
+              <ListItem
+                button
+                selected={this.selectedMenu === 'place'}
+                data-menu="place"
+                onClick={this.handleListItemClick}
+              >
                 <ListItemIcon>
                   <Place />
                 </ListItemIcon>
@@ -182,7 +187,12 @@ class MiniDrawer extends React.Component<IProps, IState> {
               </ListItem>
             </Link>
             <Link to="/restaurant" className="menu">
-              <ListItem button={true} selected={this.selectedMenu === 'restaurant'} onClick={event => this.handleListItemClick(event, 'restaruant')}>
+              <ListItem
+                button
+                selected={this.selectedMenu === 'restaurant'}
+                data-menu="restaurant"
+                onClick={this.handleListItemClick}
+              >
                 <ListItemIcon>
                   <Restaurant />
                 </ListItemIcon>
@@ -190,7 +200,12 @@ class MiniDrawer extends React.Component<IProps, IState> {
               </ListItem>
             </Link>
             <Link to="/localbar" className="menu">
-              <ListItem button={true} selected={this.selectedMenu === 'localbar'} onClick={event => this.handleListItemClick(event, 'localbar')}>
+              <ListItem
+                button
+                selected={this.selectedMenu === 'localbar'}
+                data-menu="localbar"
+                onClick={this.handleListItemClick}
+              >
                 <ListItemIcon>
                   <LocalBar />
                 </ListItemIcon>
@@ -198,7 +213,12 @@ class MiniDrawer extends React.Component<IProps, IState> {
               </ListItem>
             </Link>
             <Link to="/info" className="menu">
-              <ListItem button={true} selected={this.selectedMenu === 'info'} onClick={event => this.handleListItemClick(event, 'info')}>
+              <ListItem
+                button
+                selected={this.selectedMenu === 'info'}
+                data-menu="info"
+                onClick={this.handleListItemClick}
+              >
                 <ListItemIcon>
                   <Info />
                 </ListItemIcon>
@@ -215,6 +235,5 @@ class MiniDrawer extends React.Component<IProps, IState> {
     );
   }
 }
-
 
 export const ResponsiveAppBar = compose(withRouter, withStyles(styles, { withTheme: true }))(MiniDrawer);

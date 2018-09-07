@@ -16,7 +16,7 @@
       ],
     },
     "outDir": "build/dist",
-    "module": "esnext",
+    "module": "commonjs", // change to commonjs for using import in node but breaking my video bg
     "target": "es5",
     "lib": [
       "es6",
@@ -35,6 +35,7 @@
     "suppressImplicitAnyIndexErrors": true,
     "noUnusedLocals": true,
     "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
   },
   "exclude": [
     "node_modules",

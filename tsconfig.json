@@ -16,7 +16,7 @@
       ],
     },
     "outDir": "build/dist",
-    "module": "commonjs",
+    "module": "esnext",
     "target": "es5",
     "lib": [
       "es6",

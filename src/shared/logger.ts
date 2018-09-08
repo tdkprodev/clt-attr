@@ -22,9 +22,9 @@ export type LoggerFilter = { [key in keyof LoggerType]: boolean };
  */
 export class Logger {
   /** Set prefix
-  * 
-  * @param value The prefix string
-  */
+   *
+   * @param value The prefix string
+   */
   static setNamespacePrefix(value: string) {
     Logger.prefix = value;
   }
@@ -42,11 +42,11 @@ export class Logger {
 
 
   /** Actually log the message
- * 
- * @param logType The log type : 'debug' | 'error' | 'info' | 'log' | 'warn'
- * @param message The message to log
- * @param ...rest The arguments to append
- */
+   * 
+   * @param logType The log type : 'debug' | 'error' | 'info' | 'log' | 'warn'
+   * @param message The message to log
+   * @param ...rest The arguments to append
+   */
   private _log(logType: keyof LoggerType, message: any, ...rest: any[]) {
     const logger = this._logger[logType];
     logger(message, ...rest);
@@ -98,19 +98,19 @@ export class Logger {
   }
 
   /** Log a message with the default log type
- * 
- * @param message The message to log
- * @param ...rest The arguments to append
- */
+   * 
+   * @param message The message to log
+   * @param ...rest The arguments to append
+   */
   public log(message: any, ...rest: any[]) {
     this._log('log', message, ...rest);
   }
 
   /** Log a warning message
- * 
- * @param message The message to log
- * @param ...rest The arguments to append
- */
+   * 
+   * @param message The message to log
+   * @param ...rest The arguments to append
+   */
   public warn(message: any, ...rest: any[]) {
     this._log('warn', message, ...rest);
   }

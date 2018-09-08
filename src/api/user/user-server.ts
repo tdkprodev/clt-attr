@@ -24,7 +24,7 @@ log.info('Logger initialized');
  * removeUserEndpoint
  * listUserEndpoint
  * saveUserEndpoint
-*/
+ */
 
 
 

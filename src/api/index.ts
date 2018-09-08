@@ -63,7 +63,7 @@ export function handleEndpoint<TBody, TResult, TTokens extends TokenMap>(
     middleware || [],
     async (request: Request, response: Response) => {
       try {
-        let user: User | undefined;
+        const user: User | undefined = undefined;
         const body: TBody = request.body;
         const [scope, ...stubs] = path.split('/', 2);
 
@@ -81,7 +81,7 @@ export function handleEndpoint<TBody, TResult, TTokens extends TokenMap>(
             return;
           }
 
-          /** IMPLEMENT LATER IF APPLICABLE
+          /* IMPLEMENT LATER IF APPLICABLE
           const tokenUser = await User.fromToken(fromToken);
           if (
             !tokenUser ||
@@ -99,7 +99,7 @@ export function handleEndpoint<TBody, TResult, TTokens extends TokenMap>(
 
           */
 
-          /** IMPLEMENT PERMISSIONS LATER
+          /* IMPLEMENT PERMISSIONS LATER
            * 
            * const valid = await Permissions.checkPermissions(
            *  user.groupId,
@@ -120,7 +120,7 @@ export function handleEndpoint<TBody, TResult, TTokens extends TokenMap>(
          * and send the response to the client.
          */
         response.send(
-          await callback(body, Object.assign(request, { user: user })),
+          await callback(body, Object.assign(request, { user })),
         );
       } catch (error) {
         log.error(error);

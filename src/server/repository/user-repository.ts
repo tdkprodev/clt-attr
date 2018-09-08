@@ -10,7 +10,7 @@ export class UserRepository {
 
   public findOneById(id: number) {
     return this.find({
-      where: { id: id },
+      where: { id },
     });
   }
 }

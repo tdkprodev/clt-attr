@@ -15,7 +15,7 @@ import { IUser } from '@shared/user';
  *  TBody,
  *  TResponse
  * >()(options);
-*/
+ */
 export const create = createEndpoint<
   { user: Partial<IUser> },
   { user: Partial<IUser> }

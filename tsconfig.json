@@ -46,6 +46,7 @@
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
     "noEmitOnError": false,
+    // "keyofStringsOnly": true, // for shared/omit.ts
   },
   "exclude": [
     "node_modules",

@@ -4,6 +4,7 @@ import * as UserEndPoint from '@api/user/user-server';
 import { Router, Request, Response } from 'express';
 import { Logger } from '@shared/logger';
 
+/** Enpoints exported */
 export {
   UserEndPoint,
 };

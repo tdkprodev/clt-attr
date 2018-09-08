@@ -125,25 +125,6 @@ export class Endpoint<TBody, TResponse, TTokens extends TokenMap> {
  * 
  * () => (options) => new Endpoint(options)
  */
-export const createEndPoint = <TBody, TResponse>() => <TTokens>(
+export const createEndpoint = <TBody, TResponse>() => <TTokens>(
   options: Pick<Endpoint<TableBody, TResponse, TTokens>, EndpointConstructorKeys>,
 ) => new Endpoint<TBody, TResponse, TTokens>(options);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

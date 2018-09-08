@@ -19,7 +19,7 @@
     "module": "commonjs", // change to commonjs for using import in node but breaking my video bg
     "target": "es5",
     "lib": [
-      "es6",
+      "es2017",
       "dom"
     ],
     "sourceMap": true,

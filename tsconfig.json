@@ -2,11 +2,11 @@
   "compilerOptions": {
     "baseUrl": "./src",
     "paths": {
+      "@api/*": [
+        "api/*"
+      ],
       "@media/*": [
         "media/*"
-      ],
-      "@store/*": [
-        "store/*"
       ],
       "@modules/*": [
         "modules/*"
@@ -14,12 +14,21 @@
       "@components/*": [
         "modules/components/*"
       ],
+      "@server/*": [
+        "server/*"
+      ],
+      "@shared/*": [
+        "shared/*"
+      ],
+      "@store/*": [
+        "store/*"
+      ],
     },
     "outDir": "build/dist",
     "module": "commonjs", // change to commonjs for using import in node but breaking my video bg
     "target": "es5",
     "lib": [
-      "es2017",
+      "es2017", // for Object.entries
       "dom"
     ],
     "sourceMap": true,

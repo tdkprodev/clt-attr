@@ -3,7 +3,7 @@ import * as express from 'express';
 import { Request, Response } from "express";
 
 import { createConnection } from "typeorm";
-import { User } from "./entities/User";
+import { User } from "./model/User";
 // import { Logger } from '../shared/logger';
 
 import { dbOptions } from '../../ormconfig';

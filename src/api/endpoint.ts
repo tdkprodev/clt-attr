@@ -8,7 +8,8 @@
 
 import { stringify } from 'querystring';
 import { values } from 'ramda';
-import { IApiResponse } from './index';
+import { IApiResponse } from './index'; // import the IApiResponse interface
+import { TableBody } from 'material-ui';
 
 /** Get token from localStorage or return an empty string */
 export function getCurrentToken() {
@@ -63,17 +64,70 @@ export class Endpoint<TBody, TResponse, TTokens extends TokenMap> {
     this.query = options.query;
   }
 
+  /** Function that makes the request to the server api and returns a response
+   * 
+   * @param options? The options object optionally containing the:  method, path, permissions, formData, tokens, query 
+   * @param body? The body passed in -- usually an object or formData
+   */
   async apiCall(
     options?: {} | null,
     body?: TBody,
   ): Promise<IApiResponse<TResponse>> {
     let requestBody;
     const token = getCurrentToken ? getCurrentToken() : '';
+    if (this.formData) {
+      requestBody = body;
+    } else if (this.method !== 'get') {
+      requestBody = typeof body === 'string' ? body : JSON.stringify(body);
+    }
 
+    /** Build parameters and queryString from options passed in if applicable */
+    let parameters = '';
+    let queryString = '';
+
+    if (options) {
+      if ('params' in options) {
+        parameters = `/${values((options as any).params || {}).join('/')}`
+      }
+
+      if ('query' in options) {
+        queryString = `?${stringify((options as any).query)}`;
+      }
+    }
+
+    /** Configure the headerConfig based on whether a formData was passed in */
+    const headerConfig: { [key: string]: string } = {
+      Accept: 'application/json',
+      Authorization: `${token}`,
+    };
+
+    if (!this.formData) {
+      headerConfig['Content-Type'] = 'application/json';
+    }
+
+    /** Make a request to the server api endpoint based on data passed in  */
+    const response = await fetch(
+      `/rest/${this.path}${parameters}${queryString}`,
+      {
+        body: requestBody as any,
+        headers: new Headers(headerConfig),
+        method: this.method,
+      },
+    );
+
+    /** Return the response as a json */
+    return (await response.json()) as IApiResponse<TResponse>;
   }
 }
 
-
+/** Function that returns a function that takes a parameter options object and returning an
+ * instance of an Endpoint class passing in the options object
+ * 
+ * () => (options) => new Endpoint(options)
+ */
+export const createEndPoint = <TBody, TResponse>() => <TTokens>(
+  options: Pick<Endpoint<TableBody, TResponse, TTokens>, EndpointConstructorKeys>,
+) => new Endpoint<TBody, TResponse, TTokens>(options);
 
 
 

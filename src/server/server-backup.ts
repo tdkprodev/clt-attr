@@ -3,7 +3,7 @@ import * as express from 'express';
 import { Request, Response } from "express";
 
 import { createConnection } from "typeorm";
-import { User } from "@server/model";
+import { User } from "@server/model/User";
 import { Logger } from '@shared/logger';
 
 import { dbOptions } from './../../ormconfig';
@@ -56,5 +56,8 @@ createConnection(dbOptions).then((connection: any) => {
   });
 
   app.listen(8000, () => console.log("Server running on 8000!"));
+
+
+
 });
 

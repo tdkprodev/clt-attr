@@ -3,10 +3,10 @@ import * as express from 'express';
 import { Request, Response } from "express";
 
 import { createConnection } from "typeorm";
-import { User } from "./model/User";
-// import { Logger } from '../shared/logger';
+import { User } from "@server/model/User";
+import { Logger } from '@shared/logger';
 
-import { dbOptions } from '../../ormconfig';
+import { dbOptions } from './../../ormconfig';
 
 createConnection(dbOptions).then((connection: any) => {
 

@@ -4,7 +4,7 @@ import { ConnectionOptions } from "typeorm";
 export let dbOptions: ConnectionOptions = {
   database: "clt",
   entities: [
-    "./src/server/entities/*.ts"
+    "./src/server/model/*.ts"
   ],
   host: "localhost",
   password: "root",

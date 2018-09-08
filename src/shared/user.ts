@@ -1,4 +1,4 @@
-import { Omit } from '@shared/omit'
+// import { Omit } from '@shared/omit'
 
 export interface IUser {
   firstName: string;

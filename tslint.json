@@ -1,5 +1,4 @@
 {
-  // "extends": [], // uncomment to relieve stress...
   "extends": [
     "tslint:recommended",
     "tslint-react",
@@ -14,14 +13,12 @@
     ]
   },
   "rules": {
-    "jsx-boolean-value": false, // THIS RULE ROCKS
+    "jsx-boolean-value": false,
     "no-console": false,
-    // "member-ordering": false,
-    // "member-access": false,
-    // "object-literal-sort-keys": false,
-    // "ordered-imports": false,
-    // "interface-name": false
-  },
-  "jsRules": {},
-  "rulesDirectory": []
+    "member-ordering": false,
+    "member-access": false,
+    "object-literal-sort-keys": false,
+    "ordered-imports": false,
+    "interface-name": false
+  }
 }

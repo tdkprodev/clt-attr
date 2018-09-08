@@ -10,10 +10,7 @@ import { Logger } from '@shared/logger';
 import { router } from '@server/rest';
 import { config } from '@shared/config';
 
-import * as debug from 'debug';
 
-
-const bug = debug('server');
 /** Instantiate and initialize Logger
  * 
  * Set the namespace prefix to 'clt-attr'
@@ -27,12 +24,11 @@ log.info('Logger initialized');
  * 
  */
 const app = express();
-app.use(express.static('/public'));
-app.use(express.static('src/public'));
-app.use(bodyParser.json({ limit: '10mb' }));
-app.use(bodyParser.urlencoded({ limit: '10mb', extended: true }));
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
 
-app.use('/rest', router);
+// app.use('/rest', router);
+app.use(express.static('/build'));
 
 app.get(
   [
@@ -43,12 +39,12 @@ app.get(
     '/signup',
   ],
   (request: Request, response: Response) => {
-    response.sendFile(resolve('public/login.html'));
+    response.sendFile(resolve('build/login.html'));
   },
 );
 
 app.all('*', (request: Request, response: Response) => {
-  response.sendFile(resolve('public/index.html'));
+  response.sendFile(resolve('build/index'));
 });
 
 /** Listen for request on specified port from config.PORT
@@ -57,14 +53,13 @@ app.all('*', (request: Request, response: Response) => {
  */
 const server = app.listen(config.PORT, () => {
   log.info(`Listening on port ${config.PORT}`);
-
-  bug('adsfasdfasdfasdf');
+  console.log(`Listening on port ${config.PORT}`);
 
   if (process.argv.indexOf('--test-only') !== -1) {
-    console.log('fooobar');
+    console.log('Found flag --test-only, so closing the server');
     log.info('Found flag --test-only, so closing the server');
     server.close();
   }
 
-  console.log(`Listening on port ${config.PORT}`);
+  console.log('Server is closed');
 });

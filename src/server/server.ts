@@ -2,12 +2,14 @@ import * as bodyParser from "body-parser";
 import * as express from 'express';
 import { Request, Response } from "express";
 
-import { createConnection } from "net";
+import { createConnection } from "typeorm";
 import { User } from "./entities/User";
+// import { Logger } from '../shared/logger';
 
-import { dbOptions } from '../app-config';
+import { dbOptions } from '../../ormconfig';
 
 createConnection(dbOptions).then((connection: any) => {
+
   const userRepository = connection.getRepository(User);
 
   // create and setup express app
@@ -17,17 +19,25 @@ createConnection(dbOptions).then((connection: any) => {
   // register routes
   app.get("/users", async (req: Request, res: Response) => {
     // here we will have logic to return all users
-    return userRepository.find();
+
+    const users = userRepository.find();
+    // res.send(users);
+    res.send("app.get('/users')");
+    return;
   });
 
   app.get("/users/:id", (req: Request, res: Response) => {
     // here we will have logic to return user by id
-    return userRepository.findOne(req.params.id);
+    const user = userRepository.findOne(req.params.id);
+    res.send("app.get('/users/:id')");
+    return;
   });
 
   app.post("/users", (req: Request, res: Response) => {
+
     // here we will have logic to save a user
     const user = userRepository.create(req.body);
+    res.send(user);
     return userRepository.save(user);
   });
 

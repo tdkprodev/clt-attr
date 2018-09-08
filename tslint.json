@@ -15,7 +15,8 @@
   },
   "rules": {
     "jsx-boolean-value": false, // THIS RULE ROCKS
-    "no-console": false
+    "no-console": false,
+    // "member-ordering": false,
     // "member-access": false,
     // "object-literal-sort-keys": false,
     // "ordered-imports": false,

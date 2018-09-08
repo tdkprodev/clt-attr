@@ -2,9 +2,9 @@ import "reflect-metadata";
 import { ConnectionOptions } from "typeorm";
 
 export let dbOptions: ConnectionOptions = {
-  database: "clt-attr",
+  database: "clt",
   entities: [
-    "./src/entities/*.ts"
+    "./src/server/entities/*.ts"
   ],
   host: "localhost",
   password: "root",

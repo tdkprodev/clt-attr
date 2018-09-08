@@ -9,6 +9,9 @@ log.info('Logger initialized');
 
 /** The interface for config  */
 interface IConfig {
+  DATABASE_URL: string;
+  DATABASE_SSL: string;
+
   PORT: string;
 
   DB_PORT: string;

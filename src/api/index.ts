@@ -15,6 +15,11 @@ export type ISuccessResponse<T> = { success: true } & T;
 export type IFailureResponse = { code: string; success: false };
 export type IApiResponse<T> = ISuccessResponse<T> | IFailureResponse;
 
+/** The router to be imported into server/rest to serve as rest APIs
+ * 
+ *  Each of the api directory under api/ will also import this router 
+ *  to add endpoints to it.
+ */
 export const router = Router();
 
 /** Function that handles the endpoint 
@@ -76,6 +81,7 @@ export function handleEndpoint<TBody, TResult, TTokens extends TokenMap>(
             return;
           }
 
+          /** IMPLEMENT LATER IF APPLICABLE
           const tokenUser = await User.fromToken(fromToken);
           if (
             !tokenUser ||
@@ -90,6 +96,8 @@ export function handleEndpoint<TBody, TResult, TTokens extends TokenMap>(
           }
 
           user = tokenUser;
+
+          */
 
           /** IMPLEMENT PERMISSIONS LATER
            * 

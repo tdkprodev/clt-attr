@@ -3,8 +3,7 @@ import * as bodyParser from "body-parser";
 
 import { Request, Response } from "express";
 // import { createConnection } from "typeorm";
-import { resolve } from 'path';
-
+import { join, resolve } from 'path';
 // import { User } from "@server/model";
 import { Logger } from '@shared/logger';
 import { router } from '@server/rest';
@@ -27,8 +26,8 @@ const app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
-// app.use('/rest', router);
-app.use(express.static('/build'));
+app.use('/rest', router);
+app.use(express.static(resolve('build')));
 
 app.get(
   [
@@ -44,7 +43,7 @@ app.get(
 );
 
 app.all('*', (request: Request, response: Response) => {
-  response.sendFile(resolve('build/index'));
+  response.sendFile(resolve('build/index.html'));
 });
 
 /** Listen for request on specified port from config.PORT
@@ -59,7 +58,6 @@ const server = app.listen(config.PORT, () => {
     console.log('Found flag --test-only, so closing the server');
     log.info('Found flag --test-only, so closing the server');
     server.close();
+    console.log('Server is closed');
   }
-
-  console.log('Server is closed');
 });

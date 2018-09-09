@@ -2,15 +2,35 @@
   "compilerOptions": {
     "baseUrl": "./src",
     "paths": {
-      "@media/*": ["media/*"],
-      "@store/*": ["store/*"],
-      "@modules/*": ["modules/*"],
-      "@components/*": ["modules/components/*"],
+      "@api/*": [
+        "api/*"
+      ],
+      "@media/*": [
+        "media/*"
+      ],
+      "@modules/*": [
+        "modules/*"
+      ],
+      "@components/*": [
+        "modules/components/*"
+      ],
+      "@server/*": [
+        "server/*"
+      ],
+      "@shared/*": [
+        "shared/*"
+      ],
+      "@store/*": [
+        "store/*"
+      ],
     },
     "outDir": "build/dist",
-    "module": "esnext",
+    "module": "commonjs", // change to commonjs for using import in node but breaking my video bg
     "target": "es5",
-    "lib": ["es6", "dom"],
+    "lib": [
+      "es2017", // for Object.entries
+      "dom",
+    ],
     "sourceMap": true,
     "allowJs": true,
     "jsx": "react",
@@ -22,8 +42,11 @@
     "noImplicitAny": true,
     "strictNullChecks": true,
     "suppressImplicitAnyIndexErrors": true,
-    "noUnusedLocals": true,
+    "noUnusedLocals": false, // from true
     "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "noEmitOnError": false,
+    // "keyofStringsOnly": true, // for shared/omit.ts
   },
   "exclude": [
     "node_modules",
@@ -32,6 +55,7 @@
     "acceptance-tests",
     "webpack",
     "jest",
-    "src/setupTests.ts"
+    "src/setupTests.ts",
+    // "src/server.ts"
   ]
 }

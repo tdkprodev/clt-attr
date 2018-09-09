@@ -3,6 +3,8 @@
 CLT-ATTR is a web app showcasing the attractions of Charlotte, North Carolina.
   - Display/link the user to the common attractions of Charlotte.
   - Amaze the user with spectacular visuals.
+  - Integrate a chat platform so users can communicate real-time?
+  - Allow sign up option so user can choose to save information?
 
 
 ### Build

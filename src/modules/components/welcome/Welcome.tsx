@@ -1,9 +1,9 @@
 import * as React from "react";
 import { Link } from 'react-router-dom';
 
-import charSkyline from "@media/charlotteSkyline.jpg";
-import charSkyView from "@media/charlotteSkyView.mp4";
-import charSkyViewWebm from "@media/charlotteSkyView.webm";
+import * as charSkyline from "@media/charlotteSkyline.jpg";
+import * as charSkyView from "@media/charlotteSkyView.mp4";
+import * as charSkyViewWebm from "@media/charlotteSkyView.webm";
 
 import { Button, Typography } from '@material-ui/core';
 

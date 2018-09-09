@@ -3,11 +3,31 @@
   "configurations": [
     {
       "type": "node",
-      "request": "attach",
-      "name": "Attach to Process",
-      "port": 5858,
-      "restart": true,
-      "protocol": "inspector"
+      "request": "launch",
+      "name": "Node",
+      "port": 9001,
+      "protocol": "inspector",
+      "runtimeExecutable": "yarn",
+      "runtimeArgs": [
+        "watch:server"
+      ],
+      "console": "integratedTerminal"
+    },
+    {
+      "type": "chrome",
+      "request": "launch",
+      "name": "Chrome",
+      "url": "http://localhost:3000",
+      "webRoot": "${workspaceRoot}/src"
+    },
+  ],
+  "compounds": [
+    {
+      "name": "Full-stack",
+      "configurations": [
+        "Node",
+        "Chrome"
+      ]
     }
   ]
 }

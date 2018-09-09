@@ -24,7 +24,7 @@
       "name": "Chrome",
       "url": "http://localhost:3000",
       "webRoot": "${workspaceRoot}/src/"
-    },
+    }
   ],
   "compounds": [
     {
@@ -34,5 +34,8 @@
         "Chrome"
       ]
     }
+  ],
+  "skipFiles": [
+    "${workspaceFolder}/node_modules/**/*.js"
   ]
 }

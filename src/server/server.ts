@@ -44,6 +44,16 @@ app.use('/rest', router);
   app.use('/users', usersRouter);
 */
 
+app.get('/saythankyou', (request: Request, response: Response) => {
+
+  response.send('Thank you for peace, thank you for mercy');
+});
+
+app.post('/user/create', (request: Request, response: Response) => {
+  console.log('request.body is', request.body);
+  response.send('you requested to create a user');
+});
+
 app.get(
   [
     '/login',
@@ -57,6 +67,7 @@ app.get(
   },
 );
 
+/** Catch all cases */
 app.all('*', (request: Request, response: Response) => {
   response.sendFile(resolve('build/index.html'));
 });

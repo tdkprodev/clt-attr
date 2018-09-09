@@ -31,6 +31,8 @@
     "start-js": "react-scripts-ts start",
     "start": "npm-run-all -p watch-css start-js",
     "watch:server": "nodemon",
+    "run:server": "ts-node -r tsconfig-paths/register ./src/server/server.ts",
+    "debug": "ts-node -r tsconfig-paths/register --inspect-brk=9001 ./src/server/server.ts",
     "build-js": "react-scripts-ts build",
     "build": "npm-run-all build-css build-js",
     "test": "react-scripts-ts test --env=jsdom",

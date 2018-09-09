@@ -4,28 +4,33 @@
     {
       "type": "node",
       "request": "launch",
-      "name": "Node",
-      "port": 9001,
+      "name": "Launch current file w/ ts-node",
       "protocol": "inspector",
-      "runtimeExecutable": "yarn",
-      "runtimeArgs": [
-        "watch:server"
+      "args": [
+        "${relativeFile}"
       ],
-      "console": "integratedTerminal"
+      "cwd": "${workspaceRoot}",
+      "runtimeArgs": [
+        "-r",
+        "tsconfig-paths/register", // so node can resolve absolute paths set in tsconfig
+        "-r",
+        "ts-node/register"
+      ],
+      "internalConsoleOptions": "openOnSessionStart"
     },
     {
       "type": "chrome",
       "request": "launch",
       "name": "Chrome",
       "url": "http://localhost:3000",
-      "webRoot": "${workspaceRoot}/src"
+      "webRoot": "${workspaceRoot}/src/"
     },
   ],
   "compounds": [
     {
       "name": "Full-stack",
       "configurations": [
-        "Node",
+        "Launch current file w/ ts-node",
         "Chrome"
       ]
     }

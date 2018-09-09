@@ -2,11 +2,11 @@ import * as express from 'express';
 import * as morgan from 'morgan';
 import * as cookieParser from 'cookie-parser';
 
+import { resolve } from 'path';
 import { Request, Response } from "express";
 // import { createConnection } from "typeorm";
-import { resolve } from 'path';
-
 // import { User } from "@server/model";
+
 import { Logger } from '@shared/logger';
 import { router } from '@server/rest';
 import { config } from '@shared/config';

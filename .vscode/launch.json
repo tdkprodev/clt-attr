@@ -16,14 +16,24 @@
         "-r",
         "ts-node/register"
       ],
-      "internalConsoleOptions": "openOnSessionStart"
-    },
+      "internalConsoleOptions": "openOnSessionStart",
+      // "showAsyncStacks": true,
+      "smartStep": true
+    }, // end Launch current file w/ ts-node
     {
       "type": "chrome",
       "request": "launch",
       "name": "Chrome",
       "url": "http://localhost:3000",
       "webRoot": "${workspaceRoot}/src/"
+    }, // end Chrome
+    {
+      "name": "Attach to url with files served from ./src/server/",
+      "type": "chrome",
+      "request": "attach",
+      "port": 9222,
+      "url": "http://localhost:3000",
+      "webRoot": "${workspaceFolder}/src/server"
     }
   ],
   "compounds": [
@@ -33,7 +43,7 @@
         "Launch current file w/ ts-node",
         "Chrome"
       ]
-    }
+    } // end Full-stack
   ],
   "skipFiles": [
     "${workspaceFolder}/node_modules/**/*.js"

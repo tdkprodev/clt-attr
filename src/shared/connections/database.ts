@@ -33,7 +33,8 @@ export class DatabaseConnection {
   }
 
   connect = () => {
-    const { DATABASE_URL } = config;
+    // const { DATABASE_URL } = config;
+    const DATABASE_URL = 'mysql:///root/root@localhost:3306/Thomas';
     assert(DATABASE_URL, 'options.url is blank');
     this.log.info('Connecting to database', {
       DATABASE_URL,
@@ -45,7 +46,7 @@ export class DatabaseConnection {
       port: 3306,
       username: 'root',
       password: 'root',
-      database: 'clt-attr',
+      database: 'clt',
       entities: [
         User,
       ],

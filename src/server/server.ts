@@ -10,6 +10,8 @@ import { Logger } from '@shared/logger';
 import { router } from '@server/rest';
 import { config } from '@shared/config';
 
+// import './database-connection'; // NEED TO LOOK INTO. DOESN'T WORK YET.
+
 
 /** 
  * Instantiate and initialize Logger

@@ -4,15 +4,15 @@ import * as cookieParser from 'cookie-parser';
 
 import { resolve } from 'path';
 import { Request, Response } from "express";
-// import { createConnection } from "typeorm";
-// import { User } from "@server/model";
+// import { createConnection } from "typeorm"; // Currently implementing differently...No need to use this here. Keeping for legacy.
 
 import { Logger } from '@shared/logger';
 import { router } from '@server/rest';
 import { config } from '@shared/config';
 
 
-/** Instantiate and initialize Logger
+/** 
+ * Instantiate and initialize Logger
  * 
  * Set the namespace prefix to 'clt-attr'
  */
@@ -24,7 +24,9 @@ log.info('Logger initialized');
 /** Instantiate an express app */
 const app = express();
 
-/** View engine setup
+/** 
+ * View engine setup
+ * 
  * app.set('views', path.join(__dirname, 'views'));
  * app.set('view engine', 'jade');
  */
@@ -36,6 +38,12 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(resolve('build')));
 
+app.use((req, res, next) => {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  next();
+});
+
 app.use('/rest', router);
 
 /* NICE CONVENTION TO ADAPT 
@@ -44,14 +52,9 @@ app.use('/rest', router);
   app.use('/users', usersRouter);
 */
 
-app.get('/saythankyou', (request: Request, response: Response) => {
+app.get('/saythankyou', (request: Request, response: Response, next) => {
 
-  response.send('Thank you for peace, thank you for mercy');
-});
-
-app.post('/user/create', (request: Request, response: Response) => {
-  console.log('request.body is', request.body);
-  response.send('you requested to create a user');
+  response.send({ value: 'Thank you for peace, thank you for mercy' });
 });
 
 app.get(
@@ -62,18 +65,18 @@ app.get(
     '/reset-password/:token',
     '/signup',
   ],
-  (request: Request, response: Response) => {
+  (request: Request, response: Response, next) => {
     response.sendFile(resolve('build/login.html'));
   },
 );
 
 /** Catch all cases */
-app.all('*', (request: Request, response: Response) => {
+app.all('*', (request: Request, response: Response, next) => {
   response.sendFile(resolve('build/index.html'));
 });
 
-/** Listen for request on specified port from config.PORT
- * 
+/** 
+ * Listen for request on specified port from config.PORT
  * Close the server if --test-only flag was specified.
  */
 const server = app.listen(config.PORT, () => {

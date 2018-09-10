@@ -2,6 +2,7 @@
   "name": "clt-attr",
   "version": "0.1.0",
   "private": true,
+  "proxy": "http://localhost:9000",
   "dependencies": {
     "@material-ui/core": "^3.0.1",
     "@material-ui/icons": "^3.0.1",
@@ -32,7 +33,7 @@
     "start": "npm-run-all -p watch-css start-js",
     "watch:server": "nodemon",
     "run:server": "ts-node -r tsconfig-paths/register ./src/server/server.ts",
-    "debug": "ts-node -r tsconfig-paths/register --inspect-brk=9001 ./src/server/server.ts",
+    "debug": "ts-node -r tsconfig-paths/register --inspect-brk=9009 ./src/server/server.ts",
     "build-js": "react-scripts-ts build",
     "build": "npm-run-all build-css build-js",
     "test": "react-scripts-ts test --env=jsdom",

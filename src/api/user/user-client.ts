@@ -18,7 +18,7 @@ import { IUser } from '@shared/user';
  */
 export const create = createEndpoint<
   { user: Partial<IUser> },
-  { user: Partial<IUser> }
+  { user: Partial<IUser> } | any
   >()({
     permissions: PERMISSIONS.NONE,
     method: 'post',

@@ -2,9 +2,9 @@
   "version": "0.2.0",
   "configurations": [
     {
+      "name": "Launch current file w/ ts-node",
       "type": "node",
       "request": "launch",
-      "name": "Launch current file w/ ts-node",
       "protocol": "inspector",
       "args": [
         "${relativeFile}"
@@ -18,34 +18,46 @@
       ],
       "internalConsoleOptions": "openOnSessionStart",
       // "showAsyncStacks": true,
-      "smartStep": true
+      "smartStep": true,
+      "skipFiles": [
+        "${workspaceFolder}/node_modules"
+      ]
     }, // end Launch current file w/ ts-node
     {
+      "name": "Launch Chrome",
       "type": "chrome",
       "request": "launch",
-      "name": "Chrome",
+      "port": 9222,
       "url": "http://localhost:3000",
-      "webRoot": "${workspaceRoot}/src/"
-    }, // end Chrome
+      "sourceMaps": true,
+      "trace": true,
+      "webRoot": "${workspaceRoot}",
+      "userDataDir": "${workspaceRoot}/out/chrome", // "userDataDir": "${workspaceRoot}/.vscode/chrome"
+      "skipFiles": [
+        "${workspaceFolder}/node_modules"
+      ]
+    }, // end Launch Chrome 
     {
-      "name": "Attach to url with files served from ./src/server/",
+      "name": "Attach Chrome",
       "type": "chrome",
       "request": "attach",
       "port": 9222,
       "url": "http://localhost:3000",
-      "webRoot": "${workspaceFolder}/src/server"
-    }
+      "sourceMaps": true,
+      "trace": true,
+      "webRoot": "${workspaceRoot}",
+      "skipFiles": [
+        "${workspaceFolder}/node_modules"
+      ]
+    }, // end Launch Chrome 
   ],
   "compounds": [
     {
       "name": "Full-stack",
       "configurations": [
         "Launch current file w/ ts-node",
-        "Chrome"
+        "Launch Chrome"
       ]
     } // end Full-stack
-  ],
-  "skipFiles": [
-    "${workspaceFolder}/node_modules/**/*.js"
   ]
 }

@@ -54,6 +54,32 @@ app.use('/rest', router);
 */
 
 app.get('/saythankyou', (request: Request, response: Response, next) => {
+  const a = 'apple';
+  const b = 'bat';
+  const c = 'cat';
+  const d = 'dog';
+  const e = 'elephant';
+  const f = 'foo';
+  const g = 'ganster';
+  const h = 'hot';
+  const i = 'igloo';
+  const j = 'jack';
+  const k = 'kelly';
+  const l = 'love';
+  const m = 'money';
+  const n = 'new';
+  const o = 'operation';
+  const p = 'ping';
+  const q = 'quarter';
+  const r = 'rat';
+  const s = 'singer';
+  const t = 'thomas';
+  const u = 'umbrella';
+  const v = 'vector';
+  const w = 'world';
+  const x = 'x-ray';
+  const y = 'you';
+  const z = 'zoo';
 
   response.send({ value: 'Thank you for peace, thank you for mercy' });
 });

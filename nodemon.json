@@ -4,7 +4,10 @@
   ],
   "ext": "ts",
   "ignore": [
-    "src/**/*.spec.ts"
+    "**/*.test.ts",
+    "**/*.spec.ts",
+    ".git",
+    "node_modules"
   ],
-  "exec": "ts-node -r tsconfig-paths/register ./src/server/server.ts"
+  "exec": "npm run debug"
 }

@@ -51,7 +51,7 @@ export class DatabaseConnection {
         User,
       ],
       synchronize: true,
-      logging: true,
+      logging: false,
       ssl: config.DATABASE_SSL === '1',
       url: DATABASE_URL, // from process.env
     });

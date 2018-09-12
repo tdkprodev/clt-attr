@@ -27,7 +27,7 @@
         "store/*"
       ],
     },
-    "outDir": "build/dist",
+    "outDir": "build",
     "module": "commonjs", // change to commonjs for using import in node but breaking my video bg
     "target": "es5",
     "lib": [

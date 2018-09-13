@@ -3,12 +3,13 @@ import * as React from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 // import { observable } from 'mobx';
 
-import { About } from '@components/about';
-import { Favorite } from '@components/favorite';
-import { Info } from '@components/info';
-import { LocalBar } from '@components/local-bar';
-import { Place } from '@components/place';
-import { Restaurant } from '@components/restaurant';
+import { About } from '@modules/about';
+import { Favorite } from '@modules/favorite';
+import { Info } from '@modules/info';
+import { LocalBar } from '@modules/local-bar';
+import { Place } from '@modules/place';
+import { Restaurant } from '@modules/restaurant';
+import { Sink } from '@modules/sink';
 import { Welcome } from '@components/welcome';
 
 import { App } from '@modules/app';
@@ -30,6 +31,7 @@ class AppRouter extends React.Component<{}, {}> {
             <Route exact={true} path="/" component={Welcome} />
             <App>
               <Switch>
+                <Route path="/sink" component={Sink} />
                 <Route path="/favorite" component={Favorite} />
                 <Route path="/place" component={Place} />
                 <Route path="/restaurant" component={Restaurant} />

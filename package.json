@@ -24,6 +24,7 @@
     "react-scripts-ts": "2.17.0",
     "recompose": "^0.30.0",
     "reflect-metadata": "^0.1.12",
+    "typeface-roboto": "^0.0.54",
     "typeorm": "^0.2.7"
   },
   "scripts": {

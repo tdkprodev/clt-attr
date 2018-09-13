@@ -45,3 +45,5 @@ Want to contribute? Great!
 
 ### Contributors
 -   [tdkprodev](https://github.com/tdkprodev)
+-   [mdawsondev] (https://github.com/mdawsondev)
+-   [AlexHarris-Charlotte] (https://github.com/AlexHarris-Charlotte)

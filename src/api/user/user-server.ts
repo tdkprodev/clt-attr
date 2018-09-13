@@ -38,8 +38,6 @@ log.info('Logger initialized');
 export const createUserEndPoint = handleEndpoint(
   create,
   async (body, request) => {
-    console.log('inside createUserEndpoint');
-    console.log('body is ', body);
 
     const validation = joi.validate(
       body.user,
@@ -60,8 +58,6 @@ export const createUserEndPoint = handleEndpoint(
      * R.path(['a', 'b'], {a: {b: 2}}); //=> 2
      * R.path(['a', 'b'], {c: {b: 2}}); //=> undefined
      */
-    console.log('validation.value is ', validation.value);
-    console.log('validation is ', validation);
     if (validation.error) {
       return {
         success: false,
@@ -81,8 +77,7 @@ export const createUserEndPoint = handleEndpoint(
     const user = new User();
     User.merge(user, validation.value);
 
-    const newUser = user.save();
-    console.log('newUser is ', newUser);
+    const newUser = await user.save();
 
     log.info({
       action: 'created',

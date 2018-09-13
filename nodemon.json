@@ -9,5 +9,5 @@
     ".git",
     "node_modules"
   ],
-  "exec": "npm run debug"
+  "exec": "yarn start:debug"
 }

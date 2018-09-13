@@ -30,7 +30,7 @@
       ]
     }, // end Launch current file w/ ts-node
     {
-      "name": "Launch via npm",
+      "name": "Launch via npm", // WORKS
       "type": "node",
       "request": "launch",
       "protocol": "inspector",

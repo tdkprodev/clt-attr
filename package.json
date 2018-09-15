@@ -24,13 +24,13 @@
     "react-scripts-ts": "2.17.0",
     "recompose": "^0.30.0",
     "reflect-metadata": "^0.1.12",
-    "typeface-roboto": "^0.0.54",
+    "typeface-roboto": "0.0.54",
     "typeorm": "^0.2.7"
   },
   "scripts": {
     "build-css": "node-sass-chokidar --include-path ./src --include-path ./node_modules src/ -o src/",
     "watch-css": "npm run build-css && node-sass-chokidar --include-path ./src --include-path ./node_modules src/ -o src/ --watch --recursive",
-    "start-js": "react-scripts-ts start --source-map true",
+    "start-js": "react-scripts-ts start",
     "start": "npm-run-all -p watch-css start-js",
     "start:server": "ts-node -r tsconfig-paths/register ./src/server/server.ts",
     "watch:server": "set DEBUG=clt-attr*,api* DEBUG_COLORS=true & nodemon ts-node -r tsconfig-paths/register ./src/server/server.ts",

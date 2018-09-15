@@ -3,21 +3,34 @@
   height: 100vh;
   position: relative;
 
+  display: grid;
+  justify-content: center;
+  align-items: center;
+
   .welcome {
 
-    position: absolute;
-    top: 10%;
-    left: 50%;
-    transform: translate(-50%, 50%);
-
+    // position: absolute;
+    // top: 10%;
+    // left: 50%;
+    // transform: translate(-50%, 50%);
     display: grid;
-    flex-direction: column;
+    flex-direction: row;
     justify-content: center;
+    align-items: center;
 
-    grid-gap: 7rem;
+    &__greeting {
+      opacity: 0;
+      animation: fadeInSlideUp 4.3s cubic-bezier(0.250, 0.460, 0.450, 0.940) .3s reverse;
+      animation-iteration-count: 1;
+    }
 
     &__button-container {
       margin: 0 auto;
     }
   }
+
+}
+
+.slide-in-bck-center {
+  animation: slide-in-bck-center 0.7s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
 }

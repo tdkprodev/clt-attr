@@ -48,7 +48,7 @@
     "noUnusedLocals": false, // from true
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
-    "noEmitOnError": false,
+    "noEmitOnError": false
     // "keyofStringsOnly": true, // for shared/omit.ts
   },
   "exclude": [
@@ -60,6 +60,5 @@
     "jest",
     "src/setupTests.ts",
     "playground/**/*"
-    // "src/server.ts"
   ]
 }

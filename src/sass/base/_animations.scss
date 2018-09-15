@@ -51,6 +51,32 @@
   }
 }
 
+@keyframes fadeInSlideUp {
+  0% {
+    opacity: 0;
+    transform: translateY(-20rem);
+    display: none;
+  }
+  10% {
+    opacity: 1;
+    transform: translateY(-5.5rem);
+    transform: scale(1.0);
+  }
+  75% {
+    transform: translateY(0);
+  }
+  87% {
+    opacity: 1;
+    transfrom: translateY(-5.5rem);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(0);
+    transfrom: scale(1.15);
+    display: block;
+  }
+}
+
 @keyframes logo-shake {
   0% {
     transform: rotateY(0deg);
@@ -84,5 +110,16 @@
   }
   100%{
     width: 100%;
+  }
+}
+
+@keyframes slide-in-bck-center {
+  0% {
+    transform: translateZ(600px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateZ(0);
+    opacity: 1;
   }
 }

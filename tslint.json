@@ -16,6 +16,7 @@
   "rules": {
     "jsx-boolean-value": false,
     "no-console": false,
+    "no-empty-interface": false,
     "member-ordering": false,
     "member-access": false,
     "object-literal-sort-keys": false,

@@ -1,13 +1,14 @@
-// import { Omit } from '@shared/omit'
+import { Omit } from '@shared/omit'
 
 export interface IUser {
+  deletedAt: Date | null;
   firstName: string;
   lastName: string;
-  // password: string;
-  // verification?: string;
+  email: string;
+  password: string;
+  verification?: string;
+  gender: 'Male' | 'Female' | 'Not Specified';
 }
 
-/** IMPLEMENT LATER
- * 
- * export interface ISanitizedUser extends Omit<IUser, 'password' | 'verification'>{}
- */
+export interface ISanitizedUser
+  extends Omit<IUser, 'password' | 'verification'> { }

@@ -16,6 +16,7 @@ src/**/*.css
 .env.development.local
 .env.test.local
 .env.production.local
+.vscode/chrome
 /playground
 
 npm-debug.log*

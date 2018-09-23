@@ -4,7 +4,10 @@ import { Link, withRouter } from 'react-router-dom';
 import classNames from 'classnames';
 import { observable } from 'mobx';
 import { observer } from 'mobx-react';
-import { compose } from 'recompose'
+import { compose } from 'recompose';
+
+import { createStyles, withStyles } from '@material-ui/core/styles';
+import { Theme } from '@material-ui/core/styles/createMuiTheme';
 
 import AppBar from '@material-ui/core/AppBar';
 import Divider from '@material-ui/core/Divider';
@@ -14,11 +17,11 @@ import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-import { withStyles } from '@material-ui/core/styles';
-import { Theme } from '@material-ui/core/styles/createMuiTheme';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 
+
+import Code from '@material-ui/icons/Code';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import Favorite from '@material-ui/icons/Favorite';
@@ -30,7 +33,7 @@ import Restaurant from '@material-ui/icons/Restaurant';
 
 const drawerWidth = 240;
 
-const styles: any = (theme: Theme) => ({
+const styles = (theme: Theme) => createStyles({
   appBar: {
     transition: theme.transitions.create(['width', 'margin'], {
       duration: theme.transitions.duration.leavingScreen,
@@ -160,6 +163,19 @@ class MiniDrawer extends React.Component<IProps, {}> {
           </div>
           <Divider />
           <List>
+            <Link to="/sink" className="menu">
+              <ListItem
+                button
+                selected={this.selectedMenu === 'sink'}
+                data-menu="sink"
+                onClick={this.handleListItemClick}
+              >
+                <ListItemIcon>
+                  <Code />
+                </ListItemIcon>
+                <ListItemText primary="Sink" />
+              </ListItem>
+            </Link>
             <Link to="/favorite" className="menu">
               <ListItem
                 button

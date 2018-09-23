@@ -10,11 +10,11 @@ src
   server
     entities                - entities for typeorm
     
-    server.ts
+    server.ts               - main entry point for Express (Server)
   shared                    - interfaces, configurations, logger, misc
   store
 
-  index.tsx                 - main entry point
+  index.tsx                 - main entry point for React (Front-end)
 
 .env                        - environment variables
 .gitignore                  - ignore specified files/directories

@@ -2,8 +2,14 @@
   "compilerOptions": {
     "baseUrl": "./src",
     "paths": {
+      "@root/*": [
+        "../*"
+      ],
       "@api/*": [
         "api/*"
+      ],
+      "@client/*": [
+        "client/*"
       ],
       "@media/*": [
         "media/*"
@@ -24,7 +30,7 @@
         "store/*"
       ],
     },
-    "outDir": "build/dist",
+    "outDir": "build",
     "module": "commonjs", // change to commonjs for using import in node but breaking my video bg
     "target": "es5",
     "lib": [
@@ -40,12 +46,13 @@
     "noImplicitReturns": true,
     "noImplicitThis": true,
     "noImplicitAny": true,
+    "skipLibCheck": true,
     "strictNullChecks": true,
     "suppressImplicitAnyIndexErrors": true,
     "noUnusedLocals": false, // from true
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
-    "noEmitOnError": false,
+    "noEmitOnError": false
     // "keyofStringsOnly": true, // for shared/omit.ts
   },
   "exclude": [
@@ -56,6 +63,6 @@
     "webpack",
     "jest",
     "src/setupTests.ts",
-    // "src/server.ts"
+    "playground/**/*"
   ]
 }

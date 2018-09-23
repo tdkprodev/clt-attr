@@ -2,12 +2,137 @@
   "version": "0.2.0",
   "configurations": [
     {
+      "name": "Launch current file w/ ts-node", // --------------------------------------------------------------------------------
+      "type": "node",
+      "request": "launch",
+      "protocol": "inspector",
+      "args": [
+        "${relativeFile}"
+      ],
+      "cwd": "${workspaceRoot}",
+      "runtimeArgs": [
+        "-r",
+        "tsconfig-paths/register", // so node can resolve absolute paths set in tsconfig
+        "-r",
+        "ts-node/register"
+      ],
+      "internalConsoleOptions": "openOnSessionStart",
+      // "showAsyncStacks": true,
+      "smartStep": true,
+      "skipFiles": [
+        "${workspaceRoot}/node_modules/**/*.js",
+        "<node_internals>/**/*.js",
+        "/**/*.min.js",
+        "bundle.js",
+        "~",
+        "bower_components",
+        "webpack-hot-middleware"
+      ]
+    }, // end Launch current file w/ ts-node
+    {
+      "name": "Launch via npm", // WORKS
+      "type": "node",
+      "request": "launch",
+      "protocol": "inspector",
+      "runtimeExecutable": "yarn",
+      "runtimeArgs": [
+        "debug"
+      ],
+      "port": 5858,
+      "smartStep": true,
+      "skipFiles": [
+        "${workspaceRoot}/node_modules/**/*.js",
+        "<node_internals>/**/*.js",
+        "/**/*.min.js",
+        "bundle.js",
+        "~",
+        "bower_components",
+        "webpack-hot-middleware"
+      ]
+    },
+    {
       "type": "node",
       "request": "attach",
-      "name": "Attach to Process",
+      "name": "Attach Node", // WORKS
       "port": 5858,
       "restart": true,
-      "protocol": "inspector"
+      "protocol": "inspector",
+      "smartStep": true,
+      "skipFiles": [
+        "${workspaceRoot}/node_modules/**/*.js",
+        "<node_internals>/**/*.js",
+        "/**/*.min.js",
+        "bundle.js",
+        "~",
+        "bower_components",
+        "webpack-hot-middleware"
+      ]
+    },
+    {
+      "name": "Launch Chrome",
+      "type": "chrome",
+      "request": "launch",
+      "port": 9222,
+      "url": "http://localhost:3000/favorite",
+      "sourceMaps": true,
+      "trace": true,
+      "webRoot": "${workspaceRoot}/src",
+      "userDataDir": "${workspaceRoot}/.vscode/chrome", // "userDataDir": "${workspaceRoot}/out/chrome",
+      "smartStep": true,
+      "skipFiles": [
+        "${workspaceRoot}/node_modules/**/*.js",
+        "<node_internals>/**/*.js",
+        "/**/*.min.js",
+        "bundle.js",
+        "~",
+        "bower_components",
+        "webpack-hot-middleware"
+      ]
+    }, // end Launch Chrome 
+    {
+      "name": "Attach Chrome", // WORKS
+      "type": "chrome",
+      "request": "attach",
+      "port": 9222,
+      "url": "http://localhost:3000/",
+      "sourceMaps": true,
+      "trace": true,
+      "webRoot": "${workspaceRoot}",
+      "smartStep": true,
+      "skipFiles": [
+        "${workspaceRoot}/node_modules/**/*.js",
+        "<node_internals>/**/*.js",
+        "/**/*.min.js",
+        "bundle.js",
+        "~",
+        "bower_components",
+        "webpack-hot-middleware",
+        "VM183",
+        "webpack/**/*"
+      ]
+    }, // end Launch Chrome 
+    {
+      "name": "Server",
+      "type": "node",
+      "request": "launch",
+      "program": "${workspaceFolder}/src/server/server.ts",
+      "cwd": "${workspaceFolder}"
+    },
+    {
+      "name": "Client",
+      "type": "node",
+      "request": "launch",
+      "program": "${workspaceFolder}/src/index.tsx",
+      "cwd": "${workspaceFolder}"
     }
+  ],
+  "compounds": [
+    {
+      "name": "Server/Client",
+      "configurations": [
+        "Server",
+        "Client"
+      ]
+    } // end Full-stack
   ]
 }

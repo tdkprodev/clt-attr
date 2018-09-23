@@ -2,9 +2,7 @@ import { Endpoint, ParamsType, TokenMap } from 'api/endpoint';
 import { Request, RequestHandler, Response, Router } from 'express';
 
 import { Logger } from 'shared/logger';
-import { GROUPS } from 'shared/permissions';
-
-import { User } from 'server/model/User';
+import { User } from 'server/model/user';
 
 
 /** Instantiate Logger and initialize it with log.info to avoid errors if nothing calls the logger */
@@ -15,18 +13,41 @@ export type ISuccessResponse<T> = { success: true } & T;
 export type IFailureResponse = { code: string; success: false };
 export type IApiResponse<T> = ISuccessResponse<T> | IFailureResponse;
 
-/** The router to be imported into server/rest to serve as rest APIs
+/** 
+ * The router to be imported into server/rest to serve as rest APIs
+ * Each of the api directory under api/ will also import this router 
+ * to add endpoints to it.
  * 
- *  Each of the api directory under api/ will also import this router 
- *  to add endpoints to it.
+ * Thanks to closure, this router variable listens for all of the specified endpoints
+ * from the options passed to each individual createEndpoint call.
+ * 
+ * By the nature of how this system was implemented, the express routing happens automatically (as if magic) 
+ * when you create an endpoint using createEndpoint() with the specified options passed in. 
+ * 
+ * i.e. for a user endpoint
+ * const create = createEndpoint()(options);
+ * 
+ * options = {
+ *   permissions: string;       - For our simplified use case, it is an empty string which defaults to false (PERMISSIONS.NONE = '')
+ *   method: MethodType;
+ *   path: string;
+ *   formData?: boolean;        - Determines whether a body will be passed into apiCall(options?, body?)
+ *   tokens?: TTokens;
+ *   query?: any;
+ * }
+ * 
+ * The create variable is an endpoint, an instance of the Endpoint class that has the very important 
+ * method -- apiCall(). 
  */
 export const router = Router();
 
-/** Function that handles the endpoint 
- * 
- * @param endpoint
- * @param callback
+/** 
+ * Function that handles the endpoint 
+ * @param endpoint The endpoint from the return of createEndpoint()(options)
+ * @param callback  The callback to invoke if/when the permissions check is valid 
+ * and the joi data validation is valid from the request handler within handleEndPoint
  * @param middleware? The optional array of middlewares to handle the request
+ * @returns sends the Promise from calling the callback passed to the handleEndpoint back to the requested client.
  * 
  * type TokenMap = { [key: string]: any }
  * type ParamsType<T> = { [key in keyof T]: any }
@@ -70,50 +91,7 @@ export function handleEndpoint<TBody, TResult, TTokens extends TokenMap>(
         /** Logs the paths and method */
         log.info(`${scope}.${stubs.join('/')} [${method.toUpperCase()}]`);
 
-        /** If a permission path is set we need to check permissions */
-        if (permissions) {
-          const fromToken = request.header('authorization');
-          if (!fromToken) {
-            response.send({
-              success: false,
-              code: 'MISSING_AUTHORIZATION',
-            });
-            return;
-          }
-
-          /* IMPLEMENT LATER IF APPLICABLE
-          const tokenUser = await User.fromToken(fromToken);
-          if (
-            !tokenUser ||
-            (tokenUser.groupId !== GROUPS.DEV &&
-              (!tokenUser.site || tokenUser.site.deletedAt))
-          ) {
-            response.send({
-              success: false,
-              code: 'MISSING_AUTHORIZATION',
-            });
-            return;
-          }
-
-          user = tokenUser;
-
-          */
-
-          /* IMPLEMENT PERMISSIONS LATER
-           * 
-           * const valid = await Permissions.checkPermissions(
-           *  user.groupId,
-           *  permissions,
-           * );
-           */
-
-          const valid = true; // TEMPORARY UNTIL IMPLEMENT PERMISSIONS
-
-          if (!valid) {
-            response.send({ success: false, code: 'MISSING_PERMISSION' });
-            return;
-          }
-        } // end of permission check
+        /** PERMISSIONS CHECKING GOES HERE */
 
         /** If the permission paths were set and the code makes it here, await the async callback 
          * passing in the body and merged request with the user info, await for the response

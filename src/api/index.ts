@@ -2,7 +2,7 @@ import { Endpoint, ParamsType, TokenMap } from 'api/endpoint';
 import { Request, RequestHandler, Response, Router } from 'express';
 
 import { Logger } from 'shared/logger';
-import { User } from 'server/model/User';
+import { User } from 'server/model/user';
 
 
 /** Instantiate Logger and initialize it with log.info to avoid errors if nothing calls the logger */

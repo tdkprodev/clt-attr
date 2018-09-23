@@ -5,12 +5,12 @@ import {
     PrimaryGeneratedColumn
 } from "typeorm";
 
-/** Import IUser interface for User model */
+/** Import ITodo interface for Todo model */
 import { ITodo } from '@shared/todo';
 
 @Entity()
 export class Todo extends BaseEntity implements ITodo {
-    /** Check whether the user is a valid User */
+    /** Check whether the todo is a valid todo */
     static isValid(todo: ITodo): todo is Todo {
         if (!todo.todo) throw new Error('EMPTY_STRING');
         return true;

@@ -1,5 +1,5 @@
 /** User repository for querying users */
-import { User } from '@server/model/User';
+import { User } from '@server/model/user';
 import { merge } from 'ramda';
 import { Brackets, FindManyOptions, FindOneOptions } from 'typeorm';
 

@@ -1,26 +1,22 @@
-import * as joi from 'joi';
-import { path } from 'ramda';
+import * as joi from "joi";
+import { path, omit } from "ramda";
 
-import { handleEndpoint, router } from '@api/index';
-import { UserRepository } from '@server/repository'; // for querying user(s)
+import { handleEndpoint, router } from "@api/index";
+import { UserRepository } from "@server/repository"; // for querying user(s)
 import { User } from "@server/model";
-import { config } from '@shared/config';
-import { Logger } from '@shared/logger';
-import {
-  create,
-  remove,
-  list,
-  save,
-} from '@api/user/user-client';
+import { config } from "@shared/config";
+import { Logger } from "@shared/logger";
+import { login, signup } from "@api/user/user-client";
+import { hash } from "bcryptjs";
 
 /** Instantiate and initialize Logger */
-const log = new Logger('api/user');
-log.info('Logger initialized');
+const log = new Logger("api/user");
+log.info("Logger initialized");
 
 /* AUTH -- IMPLEMENT LATER */
 
-/** CRUD 
- * 
+/** CRUD
+ *
  * createUserEndpoint
  * removeUserEndpoint
  * listUserEndpoint
@@ -28,69 +24,83 @@ log.info('Logger initialized');
  */
 
 /**
- * create is the create endpoint that will be used to get data from to fabricate 
+ * create is the create endpoint that will be used to get data from to fabricate
  * the enpoint for express routing to listen for.
- * 
- * The async function is the callback that will be invoked if/when permisions and 
+ *
+ * The async function is the callback that will be invoked if/when permisions and
  * joi validation have passed validity. This function is where you want to CRUD.
  */
-export const createUserEndPoint = handleEndpoint(
-  create,
-  async (body, request) => {
-
-    const validation = joi.validate(
-      body.user,
-      joi.object().keys({
-        firstName: joi.string(),
-        lastName: joi.string(),
-      }),
-    );
-
-    /**
-     * If joi validation fails, return a success false with failure code.
-     * 
-     * path is a Ramda method. It retrieve the value at a given path.
-     * 
-     * First parameter is an array of paths.
-     * Second parameter is an object to retrieve the value using the path from.
-     * 
-     * R.path(['a', 'b'], {a: {b: 2}}); //=> 2
-     * R.path(['a', 'b'], {c: {b: 2}}); //=> undefined
-     */
-    if (validation.error) {
-      return {
-        success: false,
-        code: path(['error', 'details', 0, 'message'], validation),
-      }
-    }
-
-    /**
-     * If joi validation passes, create a new user with the User model.
-     * 
-     * User.merge is native to TypeORM. 
-     * 
-     * The syntax is for merge is:
-     * 
-     * Model.merge(modelInstance, validationValueOfSupposedlyObjectFollowingModelInterface)
-     */
-    const user = new User();
-    User.merge(user, validation.value);
-
-    const newUser = await user.save();
-
-    log.info({
-      action: 'created',
-      entity: newUser,
-      type: 'user',
-      user,
-    })
-
+export const loginEndPoint = handleEndpoint(login, async body => {
+  const user = (await User.find({ email: body.email })) as any;
+  if (!user) {
     return {
-      success: true,
-      user,
+      success: false,
+      code: "NOT_FOUND"
     };
   }
-);
 
+  if (await user.checkPassword(body.password)) {
+    return {
+      success: true,
+      token: user.generateToken(),
+      user
+    };
+  }
+  return { success: false, code: "INVALID_PASSWORD" };
+});
 
+export const signupEndpoint = handleEndpoint(signup, async body => {
+  const validation = joi.validate(
+    body,
+    joi.object().keys({
+      email: joi
+        .string()
+        .email()
+        .required(),
+      firstName: joi.string(),
+      lastName: joi.string(),
+      password: joi.string().required(),
 
+      verification: joi.strip(),
+      verified: joi.boolean()
+    })
+  );
+
+  if (validation.error) {
+    return {
+      success: false,
+      code: path(["error", "details", 0, "message"], validation) as string
+    };
+  }
+
+  if (!body.email) {
+    return {
+      success: false,
+      code: "EMAIL_MISSING"
+    };
+  }
+
+  const existingUser = await User.find({ email: body.email });
+  if (existingUser) {
+    return {
+      success: false,
+      code: "EMAIL_EXISTS"
+    };
+  }
+
+  const user = new User();
+  validation.value.password = await hash(
+    body.password as string,
+    config.PASSWORD_SALT
+  );
+
+  User.merge(user, validation.value);
+
+  const newUser = await user.save();
+
+  return {
+    success: true,
+    token: newUser.generateToken(),
+    user: omit(["password", "verification"], newUser)
+  };
+});

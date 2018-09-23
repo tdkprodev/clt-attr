@@ -8,6 +8,9 @@
       "@api/*": [
         "api/*"
       ],
+      "@client/*": [
+        "client/*"
+      ],
       "@media/*": [
         "media/*"
       ],

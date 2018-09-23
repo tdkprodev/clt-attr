@@ -2,7 +2,7 @@ import * as React from 'react';
 
 import { Paper, Input, Button, Dialog } from '@material-ui/core';
 
-import { create } from '@api/user/user-client';
+// import { create } from '@api/user/user-client';
 
 
 export class Info extends React.Component {
@@ -37,10 +37,10 @@ export class Info extends React.Component {
       firstName: this.state.firstName,
       lastName: this.state.lastName
     }
-    const result = await create.apiCall(null, { user })
+    // const result = await create.apiCall(null, { user })
 
 
-    console.log('result is ', result);
+    // console.log('result is ', result);
   }
 
   public render() {

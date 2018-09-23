@@ -74,7 +74,7 @@ class SignIn extends React.Component<IProps & WithStyles<typeof styles>> {
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
     const { value } = event.target as HTMLInputElement;
-
+    
     this[field] = {
       value,
       error: ''
@@ -83,8 +83,6 @@ class SignIn extends React.Component<IProps & WithStyles<typeof styles>> {
 
   public handleSignIn = (event: React.SyntheticEvent) => {
     event.preventDefault();
-    
-    console.log(this.email, this.password);
     const { value: email } = this.email;
     const { value: password } = this.password;
 
@@ -101,6 +99,9 @@ class SignIn extends React.Component<IProps & WithStyles<typeof styles>> {
 
   render() {
     const { classes } = this.props;
+
+    const loginError = authStore.login.error;
+    console.log('---------------', loginError);
 
     return (
       <React.Fragment>

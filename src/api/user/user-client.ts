@@ -1,14 +1,14 @@
 import { createEndpoint } from '@api/endpoint';
 import { PERMISSIONS } from 'shared/permissions';
-import { IUser } from '@shared/user';
+import { IUser, ISanitizedUser } from '@shared/user';
 
 /* AUTH -- IMPLEMENT LATER */
 
 /** CRUD 
  * 
- * create
+ * login 
+ * signup
  * remove
- * list
  * save
  * 
  * export const action = createEndpoint<
@@ -16,38 +16,20 @@ import { IUser } from '@shared/user';
  *  TResponse
  * >()(options);
  */
-export const create = createEndpoint<
-  { user: Partial<IUser> },
-  { user: Partial<IUser> } | any
+export const login = createEndpoint<
+  { email: string; password: string },
+  { token: string; user: Partial<IUser>}
   >()({
     permissions: PERMISSIONS.NONE,
     method: 'post',
-    path: 'user/create',
+    path: 'user/login',
   });
 
-export const remove = createEndpoint<
-  never,
-  {}
+export const signup = createEndpoint<
+  Partial<IUser>,
+  { user: Partial<IUser>; token: string }
   >()({
     permissions: PERMISSIONS.NONE,
     method: 'delete',
     path: 'user/delete',
-  });
-
-export const list = createEndpoint<
-  never,
-  { users: IUser[] }
-  >()({
-    permissions: PERMISSIONS.NONE,
-    method: 'get',
-    path: 'user/list',
-  });
-
-export const save = createEndpoint<
-  { user: Partial<IUser> },
-  { user: Partial<IUser> }
-  >()({
-    permissions: PERMISSIONS.NONE,
-    method: 'put',
-    path: 'user/save',
   });

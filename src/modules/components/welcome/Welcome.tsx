@@ -10,6 +10,7 @@ import * as charSkyViewWebm from "@media/charlotteSkyView.webm";
 import { Button, Slide, Typography, Fade } from '@material-ui/core';
 
 import { SignIn } from '@modules/auth/signin';
+import { SignUp } from '@modules/auth/signup';
 
 /**
  * Render the landing page and provide a button to navigate to the app.
@@ -46,7 +47,8 @@ export class Welcome extends React.Component<any, any> {
         <section className="welcome">
           {/* <Typography id="greeting" className="welcome__greeting slide-in-bck-center" variant="display4" align="center">Welcome to Charlotte</Typography> */}
           <Slide direction="up" in={this.showSignIn} mountOnEnter unmountOnExit timeout={.7e3}>
-            <SignIn />
+            {/* <SignIn /> */}
+            <SignUp />
           </Slide>
         </section>
       </header>

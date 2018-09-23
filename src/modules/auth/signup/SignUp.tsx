@@ -59,6 +59,11 @@ const styles = (theme: Theme) =>
       marginTop: theme.spacing.unit * 3,
       textDecoration: "none"
     },
+    rowLayout: {
+      display: "grid",
+      gridTemplateColumns: "1fr 1fr",
+      gridGap: ".3rem"
+    },
     buttonContainer: {
       display: "flex",
       justifyContent: "space-between"
@@ -67,14 +72,20 @@ const styles = (theme: Theme) =>
 
 interface IProps { }
 
+type SignUpField = "firstName" | "lastName" | "password" | "passwordConfirmation" | "email";
+
 @observer
-class SignIn extends React.Component<IProps & WithStyles<typeof styles>> {
+class SignUp extends React.Component<IProps & WithStyles<typeof styles>> {
+  @observable firstName: IStatusValue = { value: '' };
+  @observable lastName: IStatusValue = { value: '' };
   @observable
   password: IStatusValue = { value: '' };
   @observable
+  passwordConfirm: IStatusValue = { value: '' };
+  @observable
   email: IStatusValue = { value: '' };
 
-  public handleInputChange = (field: "password" | "email") => (
+  public handleInputChange = (field: SignUpField) => (
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
     const { value } = event.target as HTMLInputElement;
@@ -85,13 +96,13 @@ class SignIn extends React.Component<IProps & WithStyles<typeof styles>> {
     }
   };
 
-  public handleSignIn = (event: React.SyntheticEvent) => {
+  public handleSignUp = (event: React.SyntheticEvent) => {
     event.preventDefault();
     const { value: email } = this.email;
     const { value: password } = this.password;
 
     if (email && password) {
-      authStore.sendLogin(email, password);
+      authStore.sendSignup(email, password);
     } else {
       authStore.setLogin({
         loading: false,
@@ -115,8 +126,29 @@ class SignIn extends React.Component<IProps & WithStyles<typeof styles>> {
             <Avatar className={classes.avatar}>
               <LockIcon />
             </Avatar>
-            <Typography variant="headline">Sign in</Typography>
-            <form className={classes.form} onSubmit={this.handleSignIn}>
+            <Typography variant="headline">Sign Up</Typography>
+            <form className={classes.form} onSubmit={this.handleSignUp}>
+              <div className={classes.rowLayout}>
+                <FormControl margin="normal">
+                  <InputLabel htmlFor="first-name">First name</InputLabel>
+                  <Input
+                    id="firstname"
+                    name="first-name"
+                    value={this.firstName.value || ""}
+                    onChange={this.handleInputChange("firstName")}
+                    autoFocus
+                  />
+                </FormControl>
+                <FormControl margin="normal">
+                  <InputLabel htmlFor="last-name">Last name</InputLabel>
+                  <Input
+                    id="last-name"
+                    name="last-name"
+                    value={this.lastName.value || ""}
+                    onChange={this.handleInputChange("lastName")}
+                  />
+                </FormControl>
+              </div>
               <FormControl margin="normal" required fullWidth>
                 <InputLabel htmlFor="email">Email Address</InputLabel>
                 <Input
@@ -124,19 +156,30 @@ class SignIn extends React.Component<IProps & WithStyles<typeof styles>> {
                   name="email"
                   value={this.email.value || ""}
                   onChange={this.handleInputChange("email")}
-                  autoFocus
                 />
               </FormControl>
-              <FormControl margin="normal" required fullWidth>
-                <InputLabel htmlFor="password">Password</InputLabel>
-                <Input
-                  name="password"
-                  type="password"
-                  id="password"
-                  value={this.password.value || ""}
-                  onChange={this.handleInputChange("password")}
-                />
-              </FormControl>
+              <div className={classes.rowLayout}>
+                <FormControl margin="normal" required fullWidth>
+                  <InputLabel htmlFor="password">Password</InputLabel>
+                  <Input
+                    name="password"
+                    type="password"
+                    id="password"
+                    value={this.password.value || ""}
+                    onChange={this.handleInputChange("password")}
+                  />
+                </FormControl>
+                <FormControl margin="normal" required fullWidth>
+                  <InputLabel htmlFor="password-confirmation">Confirm password</InputLabel>
+                  <Input
+                    name="password-confirmation"
+                    type="password"
+                    id="password-confirmation"
+                    value={this.passwordConfirm.value || ""}
+                    onChange={this.handleInputChange("passwordConfirmation")}
+                  />
+                </FormControl>
+              </div>
               <div className={classes.buttonContainer}>
                 <Button
                   type="submit"
@@ -144,25 +187,15 @@ class SignIn extends React.Component<IProps & WithStyles<typeof styles>> {
                   color="primary"
                   className={classes.submit}
                 >
-                  Sign in
+                  Sign Up
                 </Button>
-                <Link to="/sink">
-                  <Button
-                    type="button"
-                    variant="flat"
-                    color="secondary"
-                    className={classes.guess}
-                  >
-                    Guess access
-                </Button>
-                </Link>
                 <Button
                   type="button"
                   variant="flat"
                   color="secondary"
                   className={classes.submit}
                 >
-                  Sign up
+                  Sign in
               </Button>
               </div>
             </form>
@@ -173,4 +206,4 @@ class SignIn extends React.Component<IProps & WithStyles<typeof styles>> {
   }
 }
 
-export default withStyles(styles)(SignIn);
+export default withStyles(styles)(SignUp);

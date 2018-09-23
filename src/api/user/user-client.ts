@@ -18,7 +18,7 @@ import { IUser, ISanitizedUser } from '@shared/user';
  */
 export const login = createEndpoint<
   { email: string; password: string },
-  { token: string; user: Partial<IUser>}
+  { token: string; user: Partial<IUser> }
   >()({
     permissions: PERMISSIONS.NONE,
     method: 'post',
@@ -30,6 +30,6 @@ export const signup = createEndpoint<
   { user: Partial<IUser>; token: string }
   >()({
     permissions: PERMISSIONS.NONE,
-    method: 'delete',
-    path: 'user/delete',
+    method: 'post',
+    path: 'user/signup',
   });

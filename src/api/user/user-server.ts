@@ -81,7 +81,8 @@ export const signupEndpoint = handleEndpoint(signup, async body => {
   }
 
   const existingUser = await User.find({ email: body.email });
-  if (existingUser) {
+  if (existingUser.length) {
+    console.log('existinguser is ', existingUser);
     return {
       success: false,
       code: "EMAIL_EXISTS"

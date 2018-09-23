@@ -2,8 +2,8 @@ import * as joi from 'joi';
 import { path } from 'ramda';
 
 import { handleEndpoint, router } from '@api/index';
-import { UserRepository } from '@server/repository'; // for querying user(s)
-import { User } from "@server/model";
+// import { TodoRepository } from '@server/repository';
+import { Todo } from "@server/model";
 import { config } from '@shared/config';
 import { Logger } from '@shared/logger';
 import {
@@ -11,38 +11,21 @@ import {
   remove,
   list,
   save,
-} from '@api/user/user-client';
+} from '@api/todo/todo-client';
 
-/** Instantiate and initialize Logger */
-const log = new Logger('api/user');
+/** Instantiate and initialize Logger for Todo API */
+const log = new Logger('api/todo');
 log.info('Logger initialized');
 
-/* AUTH -- IMPLEMENT LATER */
-
-/** CRUD 
- * 
- * createUserEndpoint
- * removeUserEndpoint
- * listUserEndpoint
- * saveUserEndpoint
- */
-
-/**
- * create is the create endpoint that will be used to get data from to fabricate 
- * the enpoint for express routing to listen for.
- * 
- * The async function is the callback that will be invoked if/when permisions and 
- * joi validation have passed validity. This function is where you want to CRUD.
- */
 export const createUserEndPoint = handleEndpoint(
   create,
   async (body, request) => {
 
     const validation = joi.validate(
-      body.user,
+      body.todo,
       joi.object().keys({
-        firstName: joi.string(),
-        lastName: joi.string(),
+        todo: joi.string(),
+        priority: joi.number(),
       }),
     );
 
@@ -65,32 +48,31 @@ export const createUserEndPoint = handleEndpoint(
     }
 
     /**
-     * If joi validation passes, create a new user with the User model.
+     * If joi validation passes, create a new todo with the Todo model.
      * 
-     * User.merge is native to TypeORM. 
+     * Todo.merge is native to TypeORM. 
      * 
      * The syntax is for merge is:
      * 
      * Model.merge(modelInstance, validationValueOfSupposedlyObjectFollowingModelInterface)
      */
-    const user = new User();
-    User.merge(user, validation.value);
+    const todo = new Todo();
+    Todo.merge(todo, validation.value);
 
-    const newUser = await user.save();
+    const newTodo = await todo.save();
 
     log.info({
       action: 'created',
-      entity: newUser,
+      entity: newTodo,
       type: 'user',
-      user,
+      user: {}, // Should be from Request.user if authis setup
     })
 
     return {
       success: true,
-      user,
+      todo,
     };
   }
 );
-
 
 

@@ -17,18 +17,22 @@ import { SignUp } from '@modules/auth/signup';
  */
 @observer
 export class Welcome extends React.Component<any, any> {
-  @observable showSignIn: boolean = false;
-  private greetingRef = React.createRef<HTMLDivElement>();
+  @observable private showModal: boolean = false;
+  @observable private showSignIn: boolean = true;
   private signInDelay: any;
 
   componentDidMount() {
-    this.signInDelay = setTimeout(() => this.showSignIn = true, 3e3);
+    this.signInDelay = setTimeout(() => this.showModal = true, 3e3);
   }
 
   /** Clear the setTimeout delay and show the signin form */
   public handleClickHero = () => {
     clearTimeout(this.signInDelay);
-    this.showSignIn = true;
+    this.showModal = true;
+  }
+
+  public handleToggleModal = () => {
+    this.showSignIn = !this.showSignIn;
   }
 
   public render() {
@@ -46,9 +50,9 @@ export class Welcome extends React.Component<any, any> {
         </div>
         <section className="welcome">
           {/* <Typography id="greeting" className="welcome__greeting slide-in-bck-center" variant="display4" align="center">Welcome to Charlotte</Typography> */}
-          <Slide direction="up" in={this.showSignIn} mountOnEnter unmountOnExit timeout={.7e3}>
-            {/* <SignIn /> */}
-            <SignUp />
+          <Slide direction="up" in={this.showModal} mountOnEnter unmountOnExit timeout={.7e3}>
+
+            {this.showSignIn ? <SignIn toggleModal={this.handleToggleModal} /> : <SignUp toggleModal={this.handleToggleModal} />}
           </Slide>
         </section>
       </header>

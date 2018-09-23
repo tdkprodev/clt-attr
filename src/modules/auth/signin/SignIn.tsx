@@ -65,7 +65,9 @@ const styles = (theme: Theme) =>
     }
   });
 
-interface IProps { }
+interface IProps {
+  toggleModal?: () => void;
+}
 
 @observer
 class SignIn extends React.Component<IProps & WithStyles<typeof styles>> {
@@ -105,7 +107,6 @@ class SignIn extends React.Component<IProps & WithStyles<typeof styles>> {
     const { classes } = this.props;
 
     const loginError = authStore.login.error;
-    console.log('---------------', loginError);
 
     return (
       <React.Fragment>
@@ -139,13 +140,14 @@ class SignIn extends React.Component<IProps & WithStyles<typeof styles>> {
               </FormControl>
               <div className={classes.buttonContainer}>
                 <Button
-                  type="submit"
-                  variant="raised"
-                  color="primary"
+                  type="button"
+                  variant="flat"
+                  color="secondary"
                   className={classes.submit}
+                  onClick={this.props.toggleModal}
                 >
-                  Sign in
-                </Button>
+                  Sign up
+              </Button>
                 <Link to="/sink">
                   <Button
                     type="button"
@@ -156,14 +158,15 @@ class SignIn extends React.Component<IProps & WithStyles<typeof styles>> {
                     Guess access
                 </Button>
                 </Link>
+
                 <Button
-                  type="button"
-                  variant="flat"
-                  color="secondary"
+                  type="submit"
+                  variant="raised"
+                  color="primary"
                   className={classes.submit}
                 >
-                  Sign up
-              </Button>
+                  Submit
+                </Button>
               </div>
             </form>
           </Paper>

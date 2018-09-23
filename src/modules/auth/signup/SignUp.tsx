@@ -70,7 +70,9 @@ const styles = (theme: Theme) =>
     }
   });
 
-interface IProps { }
+interface IProps {
+  toggleModal?: () => void;
+}
 
 type SignUpField = "firstName" | "lastName" | "password" | "passwordConfirmation" | "email";
 
@@ -116,7 +118,6 @@ class SignUp extends React.Component<IProps & WithStyles<typeof styles>> {
     const { classes } = this.props;
 
     const loginError = authStore.login.error;
-    console.log('---------------', loginError);
 
     return (
       <React.Fragment>
@@ -182,21 +183,22 @@ class SignUp extends React.Component<IProps & WithStyles<typeof styles>> {
               </div>
               <div className={classes.buttonContainer}>
                 <Button
+                  type="button"
+                  variant="flat"
+                  color="secondary"
+                  className={classes.submit}
+                  onClick={this.props.toggleModal}
+                >
+                  Sign in
+                </Button>
+                <Button
                   type="submit"
                   variant="raised"
                   color="primary"
                   className={classes.submit}
                 >
-                  Sign Up
+                  Submit
                 </Button>
-                <Button
-                  type="button"
-                  variant="flat"
-                  color="secondary"
-                  className={classes.submit}
-                >
-                  Sign in
-              </Button>
               </div>
             </form>
           </Paper>
